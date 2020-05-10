@@ -1,0 +1,74 @@
+name: "Continuous Delivery"
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  BUILD_CONFIGURATION: "Release"
+  IS_PRERELEASE: "true"
+  NUGET_PACKAGES_SOURCE_NAME: "nuget.org"
+  TEST_RESULTS_DIR: "./test-results/"
+  RUN_BENCHMARK: "true"
+  COMPRESS_ARTIFACTS: "true"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Avoid shallow clone so NBGV can do its work.
+
+      # Use Nerdbank.GitVersioning to set version variables: https://github.com/AArnott/nbgv
+      - name: Set version
+        uses: aarnott/nbgv@v0.3
+        with:
+          setAllVars: true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.100
+
+      - name: Run build script
+        run: ./.build/run_full_pipeline.ps1 -configuration ${{ env.BUILD_CONFIGURATION }} -testResultsDirectory "${{ env.TEST_RESULTS_DIR }}" -benchmark ${{ env.RUN_BENCHMARK }} -compress ${{ env.COMPRESS_ARTIFACTS }}
+        shell: pwsh
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: FlabIt.Guardians v${{ env.NBGV_AssemblyInformationalVersion }}
+          path: "./artifacts.zip"
+
+      - name: Code Coverage reports
+        uses: actions/upload-artifact@v1
+        with:
+          name: Coverage Report v${{ env.NBGV_AssemblyInformationalVersion }}
+          path: "./coverage-reports.zip"
+
+      - name: Benchmark reports
+        uses: actions/upload-artifact@v1
+        if: env.RUN_BENCHMARK == 'true'
+        with:
+          name: Benchmark Report v${{ env.NBGV_AssemblyInformationalVersion }}
+          path: "./benchmark-reports.zip"
+
+      - name: Publish NuGet package(s)
+        run: ./.build/publish_nuget_packages.ps1 -source ${{ env.NUGET_PACKAGES_SOURCE_NAME }} -token ${{ secrets.NUGET_PACKAGES_SOURCE_TOKEN }}
+        shell: pwsh
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.NBGV_SimpleVersion }}
+          release_name: Release v${{ env.NBGV_SimpleVersion }}
+          draft: true
+          prerelease: "{{ env.IS_PRERELEASE }}"

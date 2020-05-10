@@ -1,0 +1,250 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using FlabIt.Guardians.Exceptions;
+using NUnit.Framework;
+
+namespace FlabIt.Guardians.Tests.Exceptions
+{
+    public abstract class ExceptionsTestBase : TestBase
+    {
+        protected const string TestParameterName = "testParameterName";
+
+        protected const string TestExceptionMessage = "Test message";
+
+        protected const string TestInnerExceptionMessage = "Test inner message";
+
+        /// <summary>
+        /// A list of distinct assembly identifier types.
+        /// That means for each assembly we consider to test, there's exactly one type from that assembly referenced here.
+        /// </summary>
+        private static readonly Type[] DistinctAssemblyIdentifierTypes =
+        {
+            typeof(GenericGuardiansExtension),
+        };
+
+        /// <summary>
+        /// Gets all exception types.
+        /// </summary>
+        /// <returns>An enumerable of all exception types.</returns>
+        protected static IEnumerable<Type> GetAllExceptionTypes()
+        {
+            foreach (var exceptionTypes in GetAssembliesToTest().Select(assembly => GetExceptionTypesFrom(assembly.GetTypes())))
+            {
+                foreach (var exceptionType in exceptionTypes)
+                {
+                    yield return exceptionType;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates an instance of <see cref="Exception"/> that can be used as an inner exception for tests.
+        /// </summary>
+        /// <returns>A new instance of <see cref="Exception"/>.</returns>
+        [SuppressMessage(category: "Naming", checkId: "CA1303:Do not pass literals as localized parameters", Justification = "We don't want to use localized resources here.")]
+        [SuppressMessage(category: "Naming", checkId: "CA2201:Do not raise reserved exception types", Justification = "We'll just use this as a test exception.")]
+        protected static Exception CreateTestInnerException()
+        {
+            return new Exception(message: TestInnerExceptionMessage);
+        }
+
+        /// <summary>
+        /// Gets all assemblies that tests should run against.
+        /// </summary>
+        /// <returns>An enumerable of assemblies that tests should run against.</returns>
+        protected static IEnumerable<Assembly> GetAssembliesToTest()
+        {
+            Assembly assembly;
+            foreach (var typeToIdentifyAssembly in DistinctAssemblyIdentifierTypes)
+            {
+                assembly = Assembly.GetAssembly(typeToIdentifyAssembly);
+
+                assembly.ThrowIfNull(nameof(assembly), $"Could not resolve assembly for type '{typeToIdentifyAssembly.FullName}'.");
+
+                yield return assembly;
+            }
+        }
+
+        /// <summary>
+        /// Returns only types that are considered as exception types.
+        /// </summary>
+        /// <param name="types">The types.</param>
+        /// <returns>An enumerable of types considered as exception types.</returns>
+        protected static IEnumerable<Type> GetExceptionTypesFrom(IEnumerable<Type> types)
+        {
+            return types.Where(type => DerivesFrom(type, typeof(Exception)));
+        }
+
+        /// <summary>
+        /// Determines whether <paramref name="type"/> derives from <paramref name="derivesFrom"/>.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="derivesFrom">The derives from.</param>
+        /// <returns><c>True</c> when <paramref name="type"/> derives from <paramref name="derivesFrom"/>, otherwise <c>false</c>.</returns>
+        protected static bool DerivesFrom(Type type, Type derivesFrom)
+        {
+            type.ThrowIfNull(nameof(type));
+            derivesFrom.ThrowIfNull(nameof(derivesFrom));
+
+            if (type.BaseType == null)
+                return false;
+
+            if (type.BaseType == derivesFrom)
+                return true;
+
+            return DerivesFrom(type.BaseType, derivesFrom);
+        }
+
+        /// <summary>
+        /// Determines whether <paramref name="type"/> is marked with attribute of type <paramref name="attributeType"/>.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="attributeType">Type of the attribute.</param>
+        /// <returns><c>True</c>, when <paramref name="type"/> is marked with attribute of type <paramref name="attributeType"/>, otherwise <c>false</c>.</returns>
+        protected static bool TypeIsMarkedWithAttribute(Type type, Type attributeType)
+        {
+            type.ThrowIfNull(nameof(type));
+            attributeType.ThrowIfNull(nameof(attributeType));
+
+            return type.CustomAttributes.Any(attribute => attribute.AttributeType.Equals(attributeType));
+        }
+
+        /// <summary>
+        /// Serializes and then deserializes the given exception.
+        /// </summary>
+        /// <typeparam name="TException">The type of the exception.</typeparam>
+        /// <param name="exception">The exception.</param>
+        /// <returns>The deserialized exception.</returns>
+        protected static TException SerializeAndDeserializeException<TException>(TException exception)
+        {
+            var formatter = new BinaryFormatter();
+            using var stream = new MemoryStream();
+
+            formatter.Serialize(serializationStream: stream, graph: exception);
+
+            stream.Seek(offset: 0, SeekOrigin.Begin);
+
+            return (TException)formatter.Deserialize(serializationStream: stream);
+        }
+
+        protected void AssertArgumentExceptionWithDefaultValuesSerializesCorrectly<TException>(TException exception)
+            where TException : ArgumentException
+        {
+            exception.ThrowIfNull(nameof(exception));
+
+            AssertArgumentExceptionSerializesCorrectly(
+                exception,
+                e =>
+                {
+                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
+
+                    Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedParameterNameToBeNotSet());
+
+                    Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeNotSet());
+                });
+        }
+
+        protected void AssertArgumentExceptionWithMessageSerializesCorrectly<TException>(TException exception, string testMessage)
+            where TException : ArgumentException
+        {
+            exception.ThrowIfNull(nameof(exception));
+            testMessage.ThrowIfNull(nameof(testMessage));
+
+            AssertArgumentExceptionSerializesCorrectly(
+                exception,
+                e =>
+                {
+                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
+                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+
+                    Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedParameterNameToBeNotSet());
+
+                    Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeNotSet());
+                });
+        }
+
+        protected void AssertArgumentExceptionWithParamNameAndMessageSerializesCorrectly<TException>(TException exception, string testMessage, string testParamName)
+            where TException : ArgumentException
+        {
+            exception.ThrowIfNull(nameof(exception));
+            testMessage.ThrowIfNull(nameof(testMessage));
+            testParamName.ThrowIfNull(nameof(testParamName));
+
+            AssertArgumentExceptionSerializesCorrectly(
+                exception,
+                e =>
+                {
+                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
+                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+
+                    Assert.IsNotNull(e.ParamName, testParamName, TestBaseStringResources.ExpectedParameterNameToBeSet());
+                    Assert.AreEqual(e.ParamName, testParamName, TestBaseStringResources.ExpectedInputParameterNameToMatchExceptionParameterName());
+
+                    Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeNotSet());
+                });
+        }
+
+        protected void AssertArgumentExceptionWithMessageAndInnerExceptionSerializesCorrectly<TException>(TException exception, string testMessage, Exception testInnerException)
+            where TException : ArgumentException
+        {
+            exception.ThrowIfNull(nameof(exception));
+            testMessage.ThrowIfNull(nameof(testMessage));
+            testInnerException.ThrowIfNull(nameof(testInnerException));
+
+            AssertArgumentExceptionSerializesCorrectly(
+                exception,
+                e =>
+                {
+                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
+                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+
+                    Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedParameterNameToBeNotSet());
+
+                    Assert.IsNotNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeSet());
+                });
+        }
+
+        protected void AssertArgumentExceptionWithParamNameAndMessageAndInnerExceptionSerializesCorrectly<TException>(TException exception, string testMessage, string testParamName, Exception testInnerException)
+            where TException : ArgumentException
+        {
+            exception.ThrowIfNull(nameof(exception));
+            testMessage.ThrowIfNull(nameof(testMessage));
+            testInnerException.ThrowIfNull(nameof(testInnerException));
+
+            AssertArgumentExceptionSerializesCorrectly(
+                exception,
+                e =>
+                {
+                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
+                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+
+                    Assert.IsNotNull(e.ParamName, testParamName, TestBaseStringResources.ExpectedParameterNameToBeSet());
+                    Assert.AreEqual(e.ParamName, testParamName, TestBaseStringResources.ExpectedInputParameterNameToMatchExceptionParameterName());
+
+                    Assert.IsNotNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeSet());
+                });
+        }
+
+        protected void AssertArgumentExceptionSerializesCorrectly<TException>(TException exception, Action<TException> assertExceptionState)
+            where TException : ArgumentException
+        {
+            exception.ThrowIfNull(nameof(exception));
+            assertExceptionState.ThrowIfNull(nameof(assertExceptionState));
+
+            assertExceptionState(exception);
+
+            string exceptionToString = exception.ToString();
+
+            exception = SerializeAndDeserializeException(exception);
+
+            assertExceptionState(exception);
+
+            Assert.AreEqual(exceptionToString, exception.ToString(), TestBaseStringResources.ExpectedExceptionOfTypeXToBeSerializedAndDeserializedCorrectly(typeof(ArgumentEmptyException)));
+        }
+    }
+}
