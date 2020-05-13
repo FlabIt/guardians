@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ardalis.GuardClauses" Version="1.4.2" />
+    <PackageReference Include="Ardalis.GuardClauses" Version="1.5.0" />
     <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
     <PackageReference Include="Dawn.Guard" Version="1.12.0" />
     <PackageReference Include="Defender.Guards" Version="1.0.0" />
