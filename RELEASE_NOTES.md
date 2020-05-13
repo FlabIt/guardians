@@ -1,5 +1,7 @@
 # Release Notes
 
+## v0.7
+
 ## v0.6
 
 ### Features
