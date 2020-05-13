@@ -22,7 +22,7 @@ Using guardians and following the [Fail Fast principle](https://enterprisecrafts
     - [Guid Guardians](#guid-guardians)
     - [Enumerable Guardians](#enumerable-guardians)
     - [Exceptions](#exceptions)
-    - [Integration with ReSharper](#integration-with-resharper)
+  - [Integration with ReSharper](#integration-with-resharper)
   - [Unit Tests](#unit-tests)
   - [Benchmarks](#benchmarks)
 
@@ -317,7 +317,7 @@ There are several different types of exceptions that might be thrown and that yo
 - ArgumentLengthLargerThanException
 - ArgumentWhitespaceException
 - 
-### Integration with ReSharper
+## Integration with ReSharper
 
 This package integrates very well with ReSharper since the library is fully annotated using the [JetBrains.Annotations NuGet package](https://www.nuget.org/packages/JetBrains.Annotations/).
 
