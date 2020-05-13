@@ -3,33 +3,29 @@
   <PropertyGroup>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
-
   <!-- Analyzers configuration -->
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory).analyzer\Analyzer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory).analyzer\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.8">
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <!-- NuGet properties -->
   <PropertyGroup>
     <Authors>Steffen Lennart Vogel</Authors>
     <Company>FlabIT</Company>
-    <Copyright>Copyright &#169; 2019 - $([System.DateTime]::Now.ToString(`yyyy`))</Copyright>
+    <Copyright>Copyright © 2019 - $([System.DateTime]::Now.ToString(`yyyy`))</Copyright>
     <RepositoryUrl>https://github.com/FlabIt/guardians</RepositoryUrl>
     <PackageProjectUrl>https://github.com/FlabIt/guardians</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -41,7 +37,6 @@ Using guardians and following the Fail Fast principle, you can easily find and f
 
 Check out the source code for more information: https://github.com/FlabIt/guardians</Description>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.1.91">
@@ -49,7 +44,6 @@ Check out the source code for more information: https://github.com/FlabIt/guardi
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory).editorconfig" Link=".editorconfig" />
     <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="" />
