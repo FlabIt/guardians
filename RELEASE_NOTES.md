@@ -5,7 +5,6 @@
 ### Features
 
 * Adding description for NuGet package
-* Updated JetBrains.Annotations package to 2020.1.0
 * Improved exception code documentation
 * Improved and added more tests
 * Adding default value for argument names for Enumerable Guardians
