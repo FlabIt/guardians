@@ -1,6 +1,6 @@
 # FlabIt Guardians
 
-[![license](https://img.shields.io/github/license/FlabIt/guardians)](https://github.com/FlabIt/guardians)
+[![license](https://img.shields.io/github/license/FlabIt/guardians)](https://github.com/FlabIt/guardians/)
 [![status-ci](https://github.com/FlabIt/guardians/workflows/Continuous%20Integration/badge.svg)](https://github.com/FlabIt/guardians/)
 [![status-cd](https://github.com/FlabIt/guardians/workflows/Continuous%20Delivery/badge.svg)](https://github.com/FlabIt/guardians/)
 [![nuget-version](https://img.shields.io/nuget/v/FlabIt.Guardians.svg)](https://www.nuget.org/packages/FlabIt.Guardians/)
