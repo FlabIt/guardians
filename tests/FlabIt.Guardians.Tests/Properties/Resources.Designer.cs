@@ -70,15 +70,6 @@ namespace FlabIt.Guardians.Tests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expected the exception message to be set..
-        /// </summary>
-        internal static string Test_ExpectedExceptionMessageToBeSet {
-            get {
-                return ResourceManager.GetString("Test_ExpectedExceptionMessageToBeSet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Expected the invalid input data to cause an exception of type &apos;{0}&apos;..
         /// </summary>
         internal static string Test_ExpectedExceptionOfTypeXBecauseInvalidInput {
@@ -93,24 +84,6 @@ namespace FlabIt.Guardians.Tests.Properties {
         internal static string Test_ExpectedExceptionOfTypeXToBeSerializedAndDeserializedCorrectly {
             get {
                 return ResourceManager.GetString("Test_ExpectedExceptionOfTypeXToBeSerializedAndDeserializedCorrectly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expected the inner exception to be not set..
-        /// </summary>
-        internal static string Test_ExpectedInnerExceptionToBeNotSet {
-            get {
-                return ResourceManager.GetString("Test_ExpectedInnerExceptionToBeNotSet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expected the inner exception to be set..
-        /// </summary>
-        internal static string Test_ExpectedInnerExceptionToBeSet {
-            get {
-                return ResourceManager.GetString("Test_ExpectedInnerExceptionToBeSet", resourceCulture);
             }
         }
         
@@ -160,20 +133,29 @@ namespace FlabIt.Guardians.Tests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expected the parameter name to be not set..
+        ///   Looks up a localized string similar to Expected property &apos;{0}&apos; to be not set..
         /// </summary>
-        internal static string Test_ExpectedParameterNameToBeNotSet {
+        internal static string Test_ExpectedPropertyToBeNotSet {
             get {
-                return ResourceManager.GetString("Test_ExpectedParameterNameToBeNotSet", resourceCulture);
+                return ResourceManager.GetString("Test_ExpectedPropertyToBeNotSet", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expected the parameter name to be set..
+        ///   Looks up a localized string similar to Expected property &apos;{0}&apos; to be set..
         /// </summary>
-        internal static string Test_ExpectedParameterNameToBeSet {
+        internal static string Test_ExpectedPropertyToBeSet {
             get {
-                return ResourceManager.GetString("Test_ExpectedParameterNameToBeSet", resourceCulture);
+                return ResourceManager.GetString("Test_ExpectedPropertyToBeSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expected property &apos;{0}&apos; to match the expected value &apos;{1}&apos;, but was &apos;{2}&apos;..
+        /// </summary>
+        internal static string Test_ExpectedPropertyToMatch {
+            get {
+                return ResourceManager.GetString("Test_ExpectedPropertyToMatch", resourceCulture);
             }
         }
         

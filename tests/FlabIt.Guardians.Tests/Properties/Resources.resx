@@ -121,9 +121,6 @@
     <value>Expected custom exceptions to follow naming convention by ending with '{0}'.</value>
     <comment>0: expected exception suffix</comment>
   </data>
-  <data name="Test_ExpectedExceptionMessageToBeSet" xml:space="preserve">
-    <value>Expected the exception message to be set.</value>
-  </data>
   <data name="Test_ExpectedExceptionOfTypeXBecauseInvalidInput" xml:space="preserve">
     <value>Expected the invalid input data to cause an exception of type '{0}'.</value>
     <comment>0: The full qualified name of the expected exception.</comment>
@@ -131,12 +128,6 @@
   <data name="Test_ExpectedExceptionOfTypeXToBeSerializedAndDeserializedCorrectly" xml:space="preserve">
     <value>Expected exception of type '{0}' to be serialized and deserialized correctly.</value>
     <comment>0: type</comment>
-  </data>
-  <data name="Test_ExpectedInnerExceptionToBeNotSet" xml:space="preserve">
-    <value>Expected the inner exception to be not set.</value>
-  </data>
-  <data name="Test_ExpectedInnerExceptionToBeSet" xml:space="preserve">
-    <value>Expected the inner exception to be set.</value>
   </data>
   <data name="Test_ExpectedInputParameterNameToMatchExceptionParameterName" xml:space="preserve">
     <value>Expected the parameter name of the input argument to match the parameter name from the resulting exception.</value>
@@ -153,11 +144,17 @@
   <data name="Test_ExpectedOutputIsReferenceEqualToInput" xml:space="preserve">
     <value>Expected output reference to be same object reference as input.</value>
   </data>
-  <data name="Test_ExpectedParameterNameToBeNotSet" xml:space="preserve">
-    <value>Expected the parameter name to be not set.</value>
+  <data name="Test_ExpectedPropertyToBeNotSet" xml:space="preserve">
+    <value>Expected property '{0}' to be not set.</value>
+    <comment>0: property name</comment>
   </data>
-  <data name="Test_ExpectedParameterNameToBeSet" xml:space="preserve">
-    <value>Expected the parameter name to be set.</value>
+  <data name="Test_ExpectedPropertyToBeSet" xml:space="preserve">
+    <value>Expected property '{0}' to be set.</value>
+    <comment>0: property name</comment>
+  </data>
+  <data name="Test_ExpectedPropertyToMatch" xml:space="preserve">
+    <value>Expected property '{0}' to match the expected value '{1}', but was '{2}'.</value>
+    <comment>0: property name, 1: expected value, 2: actual value</comment>
   </data>
   <data name="Test_ExpectedTypeToBeMarkedWithAttributeOfType" xml:space="preserve">
     <value>Expected type '{0}' to be marked with attribute of type '{1}'.</value>
