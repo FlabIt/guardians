@@ -59,10 +59,9 @@ namespace FlabIt.Guardians.Tests.Exceptions
         /// <returns>An enumerable of assemblies that tests should run against.</returns>
         protected static IEnumerable<Assembly> GetAssembliesToTest()
         {
-            Assembly assembly;
             foreach (var typeToIdentifyAssembly in DistinctAssemblyIdentifierTypes)
             {
-                assembly = Assembly.GetAssembly(typeToIdentifyAssembly);
+                var assembly = Assembly.GetAssembly(typeToIdentifyAssembly);
 
                 assembly.ThrowIfNull(nameof(assembly), $"Could not resolve assembly for type '{typeToIdentifyAssembly.FullName}'.");
 
@@ -111,7 +110,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
             type.ThrowIfNull(nameof(type));
             attributeType.ThrowIfNull(nameof(attributeType));
 
-            return type.CustomAttributes.Any(attribute => attribute.AttributeType.Equals(attributeType));
+            return type.CustomAttributes.Any(attribute => attribute.AttributeType == attributeType);
         }
 
         /// <summary>
