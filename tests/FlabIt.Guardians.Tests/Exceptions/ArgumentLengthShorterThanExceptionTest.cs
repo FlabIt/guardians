@@ -10,6 +10,8 @@ namespace FlabIt.Guardians.Tests.Exceptions
     [SuppressMessage(category: "Naming", checkId: "CA2208:Instantiate argument exceptions correctly", Justification = "We supply the correct parameter name for the test here.")]
     public class ArgumentLengthShorterThanExceptionTest : ExceptionsTestBase
     {
+        #region Default Constructors
+
         [Test]
         public void When_serializing_exception_with_default_values_should_deserialize_correctly()
         {
@@ -53,5 +55,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
 
             AssertArgumentExceptionWithParamNameAndMessageAndInnerExceptionSerializesCorrectly(exception, TestExceptionMessage, TestParameterName, testInnerException);
         }
+
+        #endregion Default Constructors
     }
 }
