@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using FlabIt.Guardians.Exceptions;
+using JetBrains.Annotations;
 using NUnit.Framework;
 
 namespace FlabIt.Guardians.Tests.Exceptions
@@ -59,10 +60,9 @@ namespace FlabIt.Guardians.Tests.Exceptions
         /// <returns>An enumerable of assemblies that tests should run against.</returns>
         protected static IEnumerable<Assembly> GetAssembliesToTest()
         {
-            Assembly assembly;
             foreach (var typeToIdentifyAssembly in DistinctAssemblyIdentifierTypes)
             {
-                assembly = Assembly.GetAssembly(typeToIdentifyAssembly);
+                var assembly = Assembly.GetAssembly(typeToIdentifyAssembly);
 
                 assembly.ThrowIfNull(nameof(assembly), $"Could not resolve assembly for type '{typeToIdentifyAssembly.FullName}'.");
 
@@ -111,7 +111,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
             type.ThrowIfNull(nameof(type));
             attributeType.ThrowIfNull(nameof(attributeType));
 
-            return type.CustomAttributes.Any(attribute => attribute.AttributeType.Equals(attributeType));
+            return type.CustomAttributes.Any(attribute => attribute.AttributeType == attributeType);
         }
 
         /// <summary>
@@ -141,11 +141,11 @@ namespace FlabIt.Guardians.Tests.Exceptions
                 exception,
                 e =>
                 {
-                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
+                    AssertHasSomeMessage(e);
 
-                    Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedParameterNameToBeNotSet());
+                    AssertHasNoParamName(e);
 
-                    Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeNotSet());
+                    AssertHasNoInnerException(e);
                 });
         }
 
@@ -159,12 +159,11 @@ namespace FlabIt.Guardians.Tests.Exceptions
                 exception,
                 e =>
                 {
-                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
-                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+                    AssertHasCorrectMessage(e, testMessage);
 
-                    Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedParameterNameToBeNotSet());
+                    AssertHasNoParamName(e);
 
-                    Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeNotSet());
+                    AssertHasNoInnerException(e);
                 });
         }
 
@@ -179,13 +178,11 @@ namespace FlabIt.Guardians.Tests.Exceptions
                 exception,
                 e =>
                 {
-                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
-                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+                    AssertHasCorrectMessage(e, testMessage);
 
-                    Assert.IsNotNull(e.ParamName, testParamName, TestBaseStringResources.ExpectedParameterNameToBeSet());
-                    Assert.AreEqual(e.ParamName, testParamName, TestBaseStringResources.ExpectedInputParameterNameToMatchExceptionParameterName());
+                    AssertHasCorrectParamName(e, testParamName);
 
-                    Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeNotSet());
+                    AssertHasNoInnerException(e);
                 });
         }
 
@@ -200,12 +197,11 @@ namespace FlabIt.Guardians.Tests.Exceptions
                 exception,
                 e =>
                 {
-                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
-                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+                    AssertHasCorrectMessage(e, testMessage);
 
-                    Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedParameterNameToBeNotSet());
+                    AssertHasNoParamName(e);
 
-                    Assert.IsNotNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeSet());
+                    AssertHasCorrectInnerException(e, testInnerException);
                 });
         }
 
@@ -220,14 +216,73 @@ namespace FlabIt.Guardians.Tests.Exceptions
                 exception,
                 e =>
                 {
-                    Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedExceptionMessageToBeSet());
-                    Assert.IsTrue(e.Message.Contains(testMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
+                    AssertHasCorrectMessage(e, testMessage);
 
-                    Assert.IsNotNull(e.ParamName, testParamName, TestBaseStringResources.ExpectedParameterNameToBeSet());
-                    Assert.AreEqual(e.ParamName, testParamName, TestBaseStringResources.ExpectedInputParameterNameToMatchExceptionParameterName());
+                    AssertHasCorrectParamName(e, testParamName);
 
-                    Assert.IsNotNull(e.InnerException, TestBaseStringResources.ExpectedInnerExceptionToBeSet());
+                    AssertHasCorrectInnerException(e, testInnerException);
                 });
+        }
+
+        protected void AssertHasCorrectMessage(Exception e, string expectedMessage)
+        {
+            e.ThrowIfNull(nameof(e));
+
+            Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.Message)));
+            Assert.IsTrue(e.Message.Contains(expectedMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedPropertyToMatch(nameof(e.Message), e.Message, expectedMessage));
+        }
+
+        protected void AssertHasSomeMessage(Exception e)
+        {
+            e.ThrowIfNull(nameof(e));
+
+            Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.Message)));
+        }
+
+        protected void AssertHasCorrectParamName(ArgumentException e, string expectedParameterName)
+        {
+            e.ThrowIfNull(nameof(e));
+
+            Assert.IsNotNull(e.ParamName, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.ParamName)));
+            Assert.AreEqual(e.ParamName, expectedParameterName, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e.ParamName), e.ParamName, expectedParameterName));
+        }
+
+        protected void AssertHasNoParamName(ArgumentException e)
+        {
+            e.ThrowIfNull(nameof(e));
+
+            Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedPropertyToBeNotSet(nameof(e.ParamName)));
+        }
+
+        protected void AssertHasCorrectInnerException(Exception e, Exception expectedInnerException)
+        {
+            e.ThrowIfNull(nameof(e));
+
+            Assert.IsNotNull(e.InnerException, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.InnerException)));
+            AssertExceptionsEqual(e.InnerException, expectedInnerException);
+        }
+
+        protected void AssertHasNoInnerException(Exception e)
+        {
+            e.ThrowIfNull(nameof(e));
+
+            Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedPropertyToBeNotSet(nameof(e.InnerException)));
+        }
+
+        protected void AssertExceptionsEqual([CanBeNull, ValidatedNotNull] Exception e, [CanBeNull, ValidatedNotNull] Exception expectedException)
+        {
+            if (e is null && expectedException is null)
+                return;
+
+            Assert.IsFalse(e is null && !(expectedException is null));
+            Assert.IsFalse(!(e is null) && expectedException is null);
+
+            Assert.AreEqual(e.StackTrace, expectedException.StackTrace, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e.StackTrace), e.StackTrace, expectedException.StackTrace));
+            Assert.AreEqual(e.Message, expectedException.Message, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e), e.Message, expectedException.Message));
+            Assert.AreEqual(e.Source, expectedException.Source, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e), e.Source, expectedException.Source));
+            Assert.AreEqual(e.InnerException, expectedException.InnerException, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e), e.InnerException, expectedException.InnerException));
+            Assert.AreEqual(e.Data, expectedException.Data, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e), e.Data, expectedException.Data));
+            Assert.AreEqual(e.HResult, expectedException.HResult, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e), e.HResult, expectedException.HResult));
         }
 
         protected void AssertArgumentExceptionSerializesCorrectly<TException>(TException exception, Action<TException> assertExceptionState)

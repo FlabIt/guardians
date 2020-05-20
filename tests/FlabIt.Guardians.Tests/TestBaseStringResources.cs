@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using JetBrains.Annotations;
 
 namespace FlabIt.Guardians.Tests
 {
@@ -74,28 +75,23 @@ namespace FlabIt.Guardians.Tests
                 type.PassThroughNonNull(nameof(type)).FullName);
 
         [DebuggerStepThrough]
-        public string ExpectedExceptionMessageToBeSet() =>
+        public string ExpectedPropertyToBeSet(string propertyName) =>
             Format(
-                Properties.Resources.Test_ExpectedExceptionMessageToBeSet);
+                Properties.Resources.Test_ExpectedPropertyToBeSet,
+                propertyName.PassThroughNonNull(nameof(propertyName)));
 
         [DebuggerStepThrough]
-        public string ExpectedParameterNameToBeSet() =>
+        public string ExpectedPropertyToBeNotSet(string propertyName) =>
             Format(
-                Properties.Resources.Test_ExpectedParameterNameToBeSet);
+                Properties.Resources.Test_ExpectedPropertyToBeNotSet,
+                propertyName.PassThroughNonNull(nameof(propertyName)));
 
         [DebuggerStepThrough]
-        public string ExpectedParameterNameToBeNotSet() =>
+        public string ExpectedPropertyToMatch(string propertyName, [CanBeNull] object givenValue, [CanBeNull] object expectedValue) =>
             Format(
-                Properties.Resources.Test_ExpectedParameterNameToBeNotSet);
-
-        [DebuggerStepThrough]
-        public string ExpectedInnerExceptionToBeSet() =>
-            Format(
-                Properties.Resources.Test_ExpectedInnerExceptionToBeSet);
-
-        [DebuggerStepThrough]
-        public string ExpectedInnerExceptionToBeNotSet() =>
-            Format(
-                Properties.Resources.Test_ExpectedInnerExceptionToBeNotSet);
+                Properties.Resources.Test_ExpectedPropertyToMatch,
+                propertyName.PassThroughNonNullNorEmptyNorWhitespace(nameof(propertyName)),
+                expectedValue,
+                givenValue);
     }
 }

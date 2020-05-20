@@ -11,14 +11,14 @@ namespace FlabIt.Guardians.Exceptions
     public class ArgumentLengthShorterThanException : ArgumentException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException" /> class.
         /// </summary>
         public ArgumentLengthShorterThanException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException" /> class.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public ArgumentLengthShorterThanException(string message)
@@ -27,7 +27,7 @@ namespace FlabIt.Guardians.Exceptions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException" /> class.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
@@ -37,7 +37,7 @@ namespace FlabIt.Guardians.Exceptions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException" /> class.
         /// </summary>
         /// <param name="paramName">The name of the parameter that caused the current exception.</param>
         /// <param name="message">The error message that explains the reason for the exception.</param>
@@ -58,7 +58,7 @@ namespace FlabIt.Guardians.Exceptions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentLengthShorterThanException" /> class.
         /// </summary>
         /// <param name="serializationInfo">The serialization information.</param>
         /// <param name="streamingContext">The streaming context.</param>
