@@ -19,6 +19,7 @@ Using guardians and following the [Fail Fast principle](https://enterprisecrafts
     - [Generic Guardians](#generic-guardians)
     - [String Guardians](#string-guardians)
     - [Guid Guardians](#guid-guardians)
+    - [Reflective Guardians](#reflective-guardians)
     - [Enumerable Guardians](#enumerable-guardians)
     - [Exceptions](#exceptions)
   - [Integration with ReSharper](#integration-with-resharper)
@@ -214,6 +215,22 @@ These will help to protect you from invalid `System.Guid` values.
 someGuidValue.ThrowIfEmpty();
 ```
 
+### Reflective Guardians
+
+These will help to protect you from invalid typed values.
+
+**ThrowIfNotOfType**
+
+```cs
+someTypedValue.ThrowIfNotOfType<TExpectedType>();
+```
+
+**ThrowIfNullOrNotOfType**
+
+```cs
+someTypedValue.ThrowIfNullOrNotOfType<TExpectedType>();
+```
+
 ### Enumerable Guardians
 
 These will help to protect you from invalid enumerable values.
@@ -229,6 +246,7 @@ someEnumerableValue.ThrowIfNullOrEmpty();
 There are several different types of exceptions that might be thrown and that you can use, too.
 
 - ArgumentEmptyException
+- ArgumentIsNotOfTypeException
 - ArgumentLengthShorterThanException
 - ArgumentLengthLargerThanException
 - ArgumentWhitespaceException

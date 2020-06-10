@@ -4,6 +4,8 @@
 
 ### Features
 
+* Added new Guardians: ReflectiveGuardiansExention
+* Added ArgumentIsNotOfTypeException exception
 * Targeting for .NET 6.0
 * Remove PassThrough... guardians as announced in v0.8
 * Automatically determine correct argument name for exception message in case none is given

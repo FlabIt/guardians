@@ -125,6 +125,10 @@
     <value>Value of argument '{0}' of type '{1}' cannot be empty.</value>
     <comment>0: Parameter Name, 1: Parameter Type</comment>
   </data>
+  <data name="Exception_ArgumentOfTypeXIsNotOfTypeYMessageWithParamName" xml:space="preserve">
+    <value>Value of argument '{0}' was of type '{1}' but was expected to be of type '{2}'.</value>
+    <comment>0: Parameter Name, 1: Actual Parameter Type 2: Expected Parameter Type</comment>
+  </data>
   <data name="Exception_ArgumentOfTypeXLargerThanMessageWithParamName" xml:space="preserve">
     <value>Length of argument '{0}' of type '{1}' is required to be larger than '{2}' but was '{3}'.</value>
     <comment>0: Parameter Name, 1: Parameter Type, 2: Expected Length, 3: Actual Length</comment>
