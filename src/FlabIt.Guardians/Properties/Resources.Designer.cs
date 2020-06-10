@@ -79,6 +79,15 @@ namespace FlabIt.Guardians.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value of argument &apos;{0}&apos; was of type &apos;{1}&apos; but was expected to be of type &apos;{2}&apos;..
+        /// </summary>
+        public static string Exception_ArgumentOfTypeXIsNotOfTypeYMessageWithParamName {
+            get {
+                return ResourceManager.GetString("Exception_ArgumentOfTypeXIsNotOfTypeYMessageWithParamName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Length of argument &apos;{0}&apos; of type &apos;{1}&apos; is required to be larger than &apos;{2}&apos; but was &apos;{3}&apos;..
         /// </summary>
         public static string Exception_ArgumentOfTypeXLargerThanMessageWithParamName {

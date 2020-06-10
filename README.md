@@ -20,6 +20,7 @@ Using guardians and following the [Fail Fast principle](https://enterprisecrafts
     - [Generic Guardians](#generic-guardians)
     - [String Guardians](#string-guardians)
     - [Guid Guardians](#guid-guardians)
+    - [Reflective Guardians](#reflective-guardians)
     - [Enumerable Guardians](#enumerable-guardians)
     - [Exceptions](#exceptions)
   - [Integration with ReSharper](#integration-with-resharper)
@@ -292,6 +293,34 @@ someGuidValue.ThrowIfEmpty();
 _ = someGuidValue.PassThroughNonEmpty();
 ```
 
+### Reflective Guardians
+
+These will help to protect you from invalid typed values.
+
+**ThrowIfNotOfType**
+
+```cs
+someTypedValue.ThrowIfNotOfType<TExpectedType>();
+```
+
+**PassThroughNonNotOfType**
+
+```cs
+var variableOfExpectedType = someTypedValue.PassThroughNonNotOfType<TExpectedType>();
+```
+
+**ThrowIfNullOrNotOfType**
+
+```cs
+someTypedValue.ThrowIfNullOrNotOfType<TExpectedType>();
+```
+
+**PassThroughNonNullNorNotOfType**
+
+```cs
+var variableOfExpectedType = someTypedValue.PassThroughNonNullNorNotOfType<TExpectedType>();
+```
+
 ### Enumerable Guardians
 
 These will help to protect you from invalid enumerable values.
@@ -313,6 +342,7 @@ _ = someEnumerableValue.PassThroughNonEmpty();
 There are several different types of exceptions that might be thrown and that you can use, too.
 
 - ArgumentEmptyException
+- ArgumentIsNotOfTypeException
 - ArgumentLengthShorterThanException
 - ArgumentLengthLargerThanException
 - ArgumentWhitespaceException

@@ -2,6 +2,12 @@
 
 ## v0.7
 
+### Features
+
+* Added new Guardians: ReflectiveGuardiansExention
+* Added ArgumentIsNotOfTypeException exception
+* Improved tests
+
 ## v0.6
 
 ### Features
