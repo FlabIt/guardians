@@ -24,7 +24,7 @@ $repositoryUrl = "https://github.com/$repository_name"
 Write-Output "Project url: '$repositoryUrl'"
 
 # Information about NuKeeper: https://github.com/NuKeeperDotNet/NuKeeper/wiki/Getting-Started
-dotnet tool install nukeeper --global
+dotnet tool install nukeeper --version 0.32.0 --global
 
 git config --global user.email $GIT_USER_EMAIL
 git config --global user.name $GIT_USER_NAME
