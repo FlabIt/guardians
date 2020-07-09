@@ -1,9 +1,6 @@
 name: "Update NuGet Packages"
 
-on:  
-  push:
-    branches:
-      - fix_nukeeper_action
+on:
   schedule:
     - cron:  '0 0 * * 3'
 
