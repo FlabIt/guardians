@@ -296,16 +296,16 @@ _ = someGuidValue.PassThroughNonEmpty();
 
 These will help to protect you from invalid enumerable values.
 
-**ThrowIfEmpty**
+**ThrowIfNullOrEmpty**
 
 ```cs
-someEnumerableValue.ThrowIfEmpty();
+someEnumerableValue.ThrowIfNullOrEmpty();
 ```
 
-**PassThroughNonEmpty**
+**PassThroughNonNullNorEmpty**
 
 ```cs
-_ = someEnumerableValue.PassThroughNonEmpty();
+_ = someEnumerableValue.PassThroughNonNullNorEmpty();
 ```
 
 ### Exceptions
