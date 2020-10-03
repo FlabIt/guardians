@@ -1,6 +1,7 @@
 param(
   [String]$repository_name,
-  [String]$github_token
+  [String]$github_token,
+  [String]$exclude
 )
 
 if ($repository_name -eq $null -or $repository_name -eq "") {
@@ -32,4 +33,4 @@ dotnet tool install nukeeper --version $nukeeperVersion --global
 git config --global user.email $GIT_USER_EMAIL
 git config --global user.name $GIT_USER_NAME
 
-nukeeper repo $repositoryUrl "$github_token" --targetBranch "$targetBranch" --change $onVersionChange --consolidate --verbosity detailed
+nukeeper repo $repositoryUrl "$github_token" --targetBranch "$targetBranch" --change $onVersionChange --consolidate --verbosity detailed --exclude $excludes
