@@ -46,22 +46,22 @@ namespace FlabIt.Guardians
             return true;
         }
 
-        private static string GetIsEmptyErrorMessage([NotNull]string argumentName)
+        private static string GetIsEmptyErrorMessage([NotNull] string argumentName)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, argumentName, typeof(string).FullName);
         }
 
-        private static string GetIsShorterThanErrorMessage([NotNull]string argumentName, int expectedLength, int actualLength)
+        private static string GetIsShorterThanErrorMessage([NotNull] string argumentName, int expectedLength, int actualLength)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXShorterThanMessageWithParamName, argumentName, typeof(string).FullName, expectedLength, actualLength);
         }
 
-        private static string GetIsLargerThanErrorMessage([NotNull]string argumentName, int expectedLength, int actualLength)
+        private static string GetIsLargerThanErrorMessage([NotNull] string argumentName, int expectedLength, int actualLength)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXLargerThanMessageWithParamName, argumentName, typeof(string).FullName, expectedLength, actualLength);
         }
 
-        private static string GetIsOnlyWhitespacesErrorMessage([NotNull]string argumentName)
+        private static string GetIsOnlyWhitespacesErrorMessage([NotNull] string argumentName)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXOnlyWhitespaceMessageWithParamName, argumentName, typeof(string).FullName);
         }
