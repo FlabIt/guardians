@@ -14,7 +14,7 @@ if ($github_token -eq $null -or $github_token -eq "") {
     exit(1)
 }
 
-$nukeeperVersion = "0.32.0"
+$nukeeperVersion = "0.33.0"
 
 $GIT_USER_EMAIL = "action@github.com"
 $GIT_USER_NAME = "Github Update NuGets Action"
