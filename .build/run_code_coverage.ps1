@@ -21,12 +21,13 @@ if (-not [bool]::TryParse($compress, [ref]$useCompression)) {
 
 . "./.build/functions.ps1"
 
-$codeCoveragePackageVersion = "16.6.1"
+$codeCoveragePackageVersion = "16.7.1"
+$reportGeneratorPackageVersion = "4.6.5"
 
 if (dotnet tool list --global | Select-String "dotnet-reportgenerator-globaltool") {
     Write-Output "Skipping install of 'dotnet-reportgenerator-globaltool'. It's already installed"
 } else {
-    dotnet tool install dotnet-reportgenerator-globaltool --global
+    dotnet tool install dotnet-reportgenerator-globaltool --global --version $reportGeneratorPackageVersion
 }
 
 if ((ensureSuccess -stepName "Install Code Coverage Generator") -ne 0) {
