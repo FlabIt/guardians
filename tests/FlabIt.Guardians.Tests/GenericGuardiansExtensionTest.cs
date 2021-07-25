@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace FlabIt.Guardians.Tests
             yield return null;
             yield return default(object);
             yield return default(string);
-            yield return default(List);
+            yield return default(List<object>);
         }
 
         public static IEnumerable NonNullValuesTestValuesSource()
@@ -26,7 +27,7 @@ namespace FlabIt.Guardians.Tests
             yield return string.Empty;
             yield return " ";
             yield return "  ";
-            yield return new List();
+            yield return new List<object>();
             yield return (bool?)true;
             yield return (bool?)false;
             yield return DateTime.Now;

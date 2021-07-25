@@ -22,7 +22,7 @@ namespace FlabIt.Guardians
             return enumerable.GetEnumerator().MoveNext();
         }
 
-        private static string GetIsEmptyErrorMessage([NotNull] string argumentName, Type argumentType)
+        private static string GetIsEmptyErrorMessage([JetBrains.Annotations.NotNull] string argumentName, Type argumentType)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, argumentName, argumentType.FullName);
         }
@@ -67,7 +67,7 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
+        [JetBrains.Annotations.NotNull]
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration", Justification = "Enumerating here is inevitably.")]
         public static IEnumerable PassThroughNonNullNorEmpty(
             [CanBeNull, ValidatedNotNull] this IEnumerable argument,

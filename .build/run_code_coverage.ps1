@@ -21,14 +21,10 @@ if (-not [bool]::TryParse($compress, [ref]$useCompression)) {
 
 . "./.build/functions.ps1"
 
-$codeCoveragePackageVersion = "16.7.1"
-$reportGeneratorPackageVersion = "4.6.5"
+$codeCoveragePackageVersion = "16.10.0"
 
-if (dotnet tool list --global | Select-String "dotnet-reportgenerator-globaltool") {
-    Write-Output "Skipping install of 'dotnet-reportgenerator-globaltool'. It's already installed"
-} else {
-    dotnet tool install dotnet-reportgenerator-globaltool --global --version $reportGeneratorPackageVersion
-}
+# Restore the Code Coverage Generator tool
+dotnet tool restore
 
 if ((ensureSuccess -stepName "Install Code Coverage Generator") -ne 0) {
     exit(1)
@@ -58,7 +54,7 @@ Get-ChildItem -File -Filter *.coverage -Path $testResultsFolder -Name -Recurse |
 $reports = $reports.Substring(0, $reports.Length - 1)
 
 $targetReportDirectory = [System.IO.Path]::Combine($testResultsFolder, "coveragereport")
-reportgenerator "-reports:$reports" "-targetdir:$targetReportDirectory" "-reporttypes:Html"
+dotnet tool --local run reportgenerator "-reports:$reports" "-targetdir:$targetReportDirectory" "-reporttypes:Html"
 
 if ((ensureSuccess -stepName "Generate HTML Coverage Reports") -ne 0) {
     exit(1)

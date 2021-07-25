@@ -2,6 +2,11 @@
 
 ## v0.7
 
+### Features
+
+* Set target framework to .Net 5.0
+* Updated NuGet packages
+
 ## v0.6
 
 ### Features

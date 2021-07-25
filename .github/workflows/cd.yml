@@ -27,14 +27,14 @@ jobs:
 
       # Use Nerdbank.GitVersioning to set version variables: https://github.com/AArnott/nbgv
       - name: Set version
-        uses: aarnott/nbgv@v0.3
+        uses: aarnott/nbgv@master
         with:
           setAllVars: true
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.100
+          dotnet-version: '5.0.x'
 
       - name: Run build script
         run: ./.build/run_full_pipeline.ps1 -configuration ${{ env.BUILD_CONFIGURATION }} -testResultsDirectory "${{ env.TEST_RESULTS_DIR }}" -benchmark ${{ env.RUN_BENCHMARK }} -compress ${{ env.COMPRESS_ARTIFACTS }}
