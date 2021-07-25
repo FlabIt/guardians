@@ -8,7 +8,7 @@ if (-not [bool]::TryParse($compress, [ref]$useCompression)) {
     exit(1)
 }
 
-$benchmarkDirectory = [System.IO.Path]::Combine($PWD, "benchmarks\FlabIt.Guardians.Benchmarks\bin\Release\netcoreapp3.1\publish")
+$benchmarkDirectory = [System.IO.Path]::Combine($PWD, "benchmarks\FlabIt.Guardians.Benchmarks\bin\Release\net5.0\publish")
 $benchmarkRunner = [System.IO.Path]::Combine($benchmarkDirectory, "FlabIt.Guardians.Benchmarks.dll")
 
 Write-Output "Running benchmark ..."

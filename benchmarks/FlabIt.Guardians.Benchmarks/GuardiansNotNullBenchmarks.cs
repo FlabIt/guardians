@@ -5,7 +5,7 @@ using BenchmarkDotNet.Jobs;
 
 namespace FlabIt.Guardians.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.NetCoreApp31)]
+    [SimpleJob(RuntimeMoniker.Net50)]
     [MemoryDiagnoser]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Not catching could break benchmark. Exception value not needed.")]
     public class GuardiansNotNullBenchmarks
