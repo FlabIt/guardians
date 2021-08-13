@@ -14,8 +14,6 @@ if ($github_token -eq $null -or $github_token -eq "") {
     exit(1)
 }
 
-$nukeeperVersion = "0.34.0"
-
 $GIT_USER_EMAIL = "action@github.com"
 $GIT_USER_NAME = "Github Update NuGets Action"
 
@@ -24,11 +22,12 @@ $onVersionChange = "minor" # major, minor, patch ...
 
 $repositoryUrl = "https://github.com/$repository_name"
 
-Write-Output "Running NuKeeper Version '$nukeeperVersion'"
+Write-Output "Running NuKeeper"
 Write-Output "Project url: '$repositoryUrl'"
 
 # Information about NuKeeper: https://github.com/NuKeeperDotNet/NuKeeper/wiki/Getting-Started
-dotnet tool install nukeeper --version $nukeeperVersion --global
+# Restore the NuKeeper tool
+dotnet tool restore
 
 git config --global user.email $GIT_USER_EMAIL
 git config --global user.name $GIT_USER_NAME

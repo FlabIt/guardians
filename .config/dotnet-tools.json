@@ -7,6 +7,12 @@
       "commands": [
         "reportgenerator"
       ]
+    },
+    "nukeeper": {
+      "version": "0.34.0",
+      "commands": [
+        "nukeeper"
+      ]
     }
   }
 }
