@@ -32,4 +32,4 @@ dotnet tool restore
 git config --global user.email $GIT_USER_EMAIL
 git config --global user.name $GIT_USER_NAME
 
-nukeeper repo $repositoryUrl "$github_token" --targetBranch "$targetBranch" --change $onVersionChange --consolidate --verbosity detailed --exclude $excludes
+dotnet tool --local run nukeeper repo $repositoryUrl "$github_token" --targetBranch "$targetBranch" --change $onVersionChange --consolidate --verbosity detailed --exclude $excludes
