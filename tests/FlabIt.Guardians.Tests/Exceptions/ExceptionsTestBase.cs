@@ -23,7 +23,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
         /// A list of distinct assembly identifier types.
         /// That means for each assembly we consider to test, there's exactly one type from that assembly referenced here.
         /// </summary>
-        private static readonly Type[] DistinctAssemblyIdentifierTypes =
+        private static readonly Type[] _distinctAssemblyIdentifierTypes =
         {
             typeof(GenericGuardiansExtension),
         };
@@ -60,7 +60,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
         /// <returns>An enumerable of assemblies that tests should run against.</returns>
         protected static IEnumerable<Assembly> GetAssembliesToTest()
         {
-            foreach (var typeToIdentifyAssembly in DistinctAssemblyIdentifierTypes)
+            foreach (var typeToIdentifyAssembly in _distinctAssemblyIdentifierTypes)
             {
                 var assembly = Assembly.GetAssembly(typeToIdentifyAssembly);
 
