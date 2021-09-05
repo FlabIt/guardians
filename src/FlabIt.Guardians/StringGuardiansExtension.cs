@@ -89,7 +89,7 @@ namespace FlabIt.Guardians
             if (!IsEmpty(argument))
                 return;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentEmptyException(argumentName, message ?? GetIsEmptyErrorMessage(argumentName));
         }
@@ -117,7 +117,7 @@ namespace FlabIt.Guardians
             if (!IsEmpty(argument))
                 return argument;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentEmptyException(argumentName, message ?? GetIsEmptyErrorMessage(argumentName));
         }
@@ -191,7 +191,7 @@ namespace FlabIt.Guardians
             if (!IsOnlyWhitespaces(argument))
                 return;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentWhitespaceException(argumentName, message ?? GetIsOnlyWhitespacesErrorMessage(argumentName));
         }
@@ -219,7 +219,7 @@ namespace FlabIt.Guardians
             if (!IsOnlyWhitespaces(argument))
                 return argument;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentWhitespaceException(argumentName, message ?? GetIsOnlyWhitespacesErrorMessage(argumentName));
         }
@@ -248,7 +248,7 @@ namespace FlabIt.Guardians
             if (!IsShorterThan(argument, length))
                 return;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentLengthShorterThanException(argumentName, message ?? GetIsShorterThanErrorMessage(argumentName, length, argument.Length));
         }
@@ -278,7 +278,7 @@ namespace FlabIt.Guardians
             if (!IsShorterThan(argument, length))
                 return argument;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentLengthShorterThanException(argumentName, message ?? GetIsShorterThanErrorMessage(argumentName, length, argument.Length));
         }
@@ -307,7 +307,7 @@ namespace FlabIt.Guardians
             if (!IsLargerThan(argument, length))
                 return;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentLengthLargerThanException(argumentName, message ?? GetIsLargerThanErrorMessage(argumentName, length, argument.Length));
         }
@@ -337,7 +337,7 @@ namespace FlabIt.Guardians
             if (!IsLargerThan(argument, length))
                 return argument;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentLengthLargerThanException(argumentName, message ?? GetIsLargerThanErrorMessage(argumentName, length, argument.Length));
         }

@@ -38,7 +38,7 @@ namespace FlabIt.Guardians
             if (!(argument is null))
                 return;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentNullException(argumentName, message ?? GetIsNullErrorMessage(argumentName));
         }
@@ -65,7 +65,7 @@ namespace FlabIt.Guardians
             if (!(argument is null))
                 return argument;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentNullException(argumentName, message ?? GetIsNullErrorMessage(argumentName));
         }
