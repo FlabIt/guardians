@@ -42,7 +42,7 @@ namespace FlabIt.Guardians
             if (!IsEmpty(argument))
                 return;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentEmptyException(argumentName, message ?? GetIsEmptyErrorMessage(argumentName));
         }
@@ -65,7 +65,7 @@ namespace FlabIt.Guardians
             if (!IsEmpty(argument))
                 return argument;
 
-            argumentName = argumentName ?? nameof(argument);
+            argumentName ??= nameof(argument);
 
             throw new ArgumentEmptyException(argumentName, message ?? GetIsEmptyErrorMessage(argumentName));
         }
