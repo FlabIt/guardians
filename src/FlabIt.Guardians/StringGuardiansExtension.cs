@@ -15,24 +15,24 @@ namespace FlabIt.Guardians
     public static class StringGuardiansExtension
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsEmpty([NotNull] string argument)
+        private static bool IsEmpty(string argument)
         {
             return argument.Length == 0;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsShorterThan([NotNull] string argument, int length)
+        private static bool IsShorterThan(string argument, int length)
         {
             return argument.Length < length;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsLargerThan([NotNull] string argument, int length)
+        private static bool IsLargerThan(string argument, int length)
         {
             return argument.Length > length;
         }
 
-        private static bool IsOnlyWhitespaces([NotNull] string argument)
+        private static bool IsOnlyWhitespaces(string argument)
         {
             if (argument.Length == 0)
                 return false;
@@ -46,22 +46,22 @@ namespace FlabIt.Guardians
             return true;
         }
 
-        private static string GetIsEmptyErrorMessage([NotNull] string argumentName)
+        private static string GetIsEmptyErrorMessage(string argumentName)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, argumentName, typeof(string).FullName);
         }
 
-        private static string GetIsShorterThanErrorMessage([NotNull] string argumentName, int expectedLength, int actualLength)
+        private static string GetIsShorterThanErrorMessage(string argumentName, int expectedLength, int actualLength)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXShorterThanMessageWithParamName, argumentName, typeof(string).FullName, expectedLength, actualLength);
         }
 
-        private static string GetIsLargerThanErrorMessage([NotNull] string argumentName, int expectedLength, int actualLength)
+        private static string GetIsLargerThanErrorMessage(string argumentName, int expectedLength, int actualLength)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXLargerThanMessageWithParamName, argumentName, typeof(string).FullName, expectedLength, actualLength);
         }
 
-        private static string GetIsOnlyWhitespacesErrorMessage([NotNull] string argumentName)
+        private static string GetIsOnlyWhitespacesErrorMessage(string argumentName)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXOnlyWhitespaceMessageWithParamName, argumentName, typeof(string).FullName);
         }
@@ -80,9 +80,9 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfNullOrEmpty(
-            [CanBeNull, ValidatedNotNull] this string argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this string? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -108,9 +108,9 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string PassThroughNonNullNorEmpty(
-            [CanBeNull, ValidatedNotNull] this string argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this string? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -137,9 +137,9 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfNullOrEmptyOrWhitespace(
-            [CanBeNull, ValidatedNotNull] this string argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this string? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNullOrEmpty(argumentName, message);
             argument.ThrowIfNullOrWhitespace(argumentName, message);
@@ -160,9 +160,9 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string PassThroughNonNullNorEmptyNorWhitespace(
-            [CanBeNull, ValidatedNotNull] this string argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this string? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNullOrEmpty(argumentName, message);
 
@@ -182,9 +182,9 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfNullOrWhitespace(
-            [CanBeNull, ValidatedNotNull] this string argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this string? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -210,9 +210,9 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string PassThroughNonNullNorWhitespace(
-            [CanBeNull, ValidatedNotNull] this string argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this string? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -238,10 +238,10 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfShorterThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [NotNull, ValidatedNotNull] this string? argument,
             int length,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -268,10 +268,10 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string PassThroughNonShorterThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [NotNull, ValidatedNotNull] this string? argument,
             int length,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -297,10 +297,10 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfLargerThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [NotNull, ValidatedNotNull] this string? argument,
             int length,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -327,10 +327,10 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string PassThroughNonLargerThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [NotNull, ValidatedNotNull] this string? argument,
             int length,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 

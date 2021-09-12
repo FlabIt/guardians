@@ -30,9 +30,9 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfNull<TArgument>(
-            [CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
             where TArgument : class
         {
             if (!(argument is null))
@@ -57,9 +57,9 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static TArgument PassThroughNonNull<TArgument>(
-            [CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
             where TArgument : class
         {
             if (!(argument is null))

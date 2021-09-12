@@ -20,7 +20,7 @@ namespace FlabIt.Guardians
             return argument.Equals(Guid.Empty);
         }
 
-        private static string GetIsEmptyErrorMessage([NotNull] string argumentName)
+        private static string GetIsEmptyErrorMessage(string argumentName)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, argumentName, typeof(Guid).FullName);
         }
@@ -36,8 +36,8 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfEmpty(
             this Guid argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             if (!IsEmpty(argument))
                 return;
@@ -59,8 +59,8 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Guid PassThroughNonEmpty(
             this Guid argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             if (!IsEmpty(argument))
                 return argument;

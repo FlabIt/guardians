@@ -22,7 +22,7 @@ namespace FlabIt.Guardians
             return enumerable.GetEnumerator().MoveNext();
         }
 
-        private static string GetIsEmptyErrorMessage([JetBrains.Annotations.NotNull] string argumentName, Type argumentType)
+        private static string GetIsEmptyErrorMessage(string argumentName, Type argumentType)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, argumentName, argumentType.FullName);
         }
@@ -40,9 +40,9 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfNullOrEmpty(
-            [CanBeNull, ValidatedNotNull] this IEnumerable argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this IEnumerable? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
@@ -70,9 +70,9 @@ namespace FlabIt.Guardians
         [JetBrains.Annotations.NotNull]
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration", Justification = "Enumerating here is inevitably.")]
         public static IEnumerable PassThroughNonNullNorEmpty(
-            [CanBeNull, ValidatedNotNull] this IEnumerable argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [CanBeNull, ValidatedNotNull] this IEnumerable? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
             argument.ThrowIfNull(argumentName, message);
 
