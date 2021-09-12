@@ -185,12 +185,18 @@ For every case you want to protect your code from, there are two kind of guardia
 **ThrowIf...**
 
 These guards will prevent you from unwanted arguments by throwing an appropriate exception for the given case.  
-Otherwise, code execution just continues.
+Otherwise, the input argument will be returned and code execution just continues.
 
 **PassThroughNon...**
 
 These guards will prevent you from unwanted arguments by throwing an appropriate exception for the given case.  
 Otherwise, the input argument will be returned and code execution just continues.
+
+> **Note**:
+> The *PassThroughNon...* guardians are marked as obsolete with the latest version.
+> The main difference between *ThrowIf* and *PassThroughNon* guardians was the return value.
+> As with the latest version, all *ThrowIf* guardians also return their input argument when it successfully has been validated.  
+> This removes the need for the *PassThroughNon* guardians which is why they are now marked as obsolete. All *PassThroughNon* will be removed in upcoming versions.
 
 ### Generic Guardians
 

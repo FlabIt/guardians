@@ -85,6 +85,12 @@ namespace FlabIt.Guardians.Tests
             AssertThatDoesNotThrow(() => GenericGuardiansExtension.ThrowIfNull(testValue));
         }
 
+        [TestCaseSource(nameof(NonNullValuesTestValuesSource))]
+        public void When_calling_ThrowIfNull_with_non_null_values_should_return_input_as_output(object testValue)
+        {
+            AssertThatReturnsInputAsOutput(() => GenericGuardiansExtension.ThrowIfNull(testValue), testValue);
+        }
+
         #endregion ThrowIfNull
 
         #region PassThroughNonNull

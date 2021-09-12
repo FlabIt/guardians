@@ -119,6 +119,12 @@ namespace FlabIt.Guardians.Tests
             AssertThatDoesNotThrow(() => StringGuardiansExtension.ThrowIfLargerThan(testValue, testLength));
         }
 
+        [TestCaseSource(nameof(StringsShorterThanOrEqualToLengthTestValuesSource))]
+        public void When_calling_ThrowIfLargerThan_with_values_shorter_than_or_equal_to_length_should_return_input_as_output(string testValue, int testLength)
+        {
+            AssertThatReturnsInputAsOutput(() => StringGuardiansExtension.ThrowIfLargerThan(testValue, testLength), testValue);
+        }
+
         #endregion ThrowIfLargerThan
 
         #region PassThroughNonLargerThan

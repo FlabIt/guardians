@@ -117,6 +117,12 @@ namespace FlabIt.Guardians.Tests
             AssertThatDoesNotThrow(() => StringGuardiansExtension.ThrowIfNullOrWhitespace(testValue));
         }
 
+        [TestCaseSource(nameof(NonOnlyWhitespaceStringsTestValuesSource))]
+        public void When_calling_ThrowIfNullOrWhitespace_with_non_whitespace_values_should_return_input_as_output(string testValue)
+        {
+            AssertThatReturnsInputAsOutput(() => StringGuardiansExtension.ThrowIfNullOrWhitespace(testValue), testValue);
+        }
+
         #endregion ThrowIfNullOrWhitespace
 
         #region PassThroughNonNullNorWhitespace
