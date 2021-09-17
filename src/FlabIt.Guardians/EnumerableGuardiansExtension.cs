@@ -41,7 +41,7 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static IEnumerable ThrowIfNullOrEmpty(
-            [CanBeNull, ValidatedNotNull] this IEnumerable? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this IEnumerable? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
@@ -72,7 +72,7 @@ namespace FlabIt.Guardians
         [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "PossibleMultipleEnumeration", Justification = "Enumerating here is inevitably.")]
         [Obsolete("Will be replaced by 'ThrowIfNullOrEmpty()' in upcoming versions.")]
         public static IEnumerable PassThroughNonNullNorEmpty(
-            [CanBeNull, ValidatedNotNull] this IEnumerable? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this IEnumerable? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {

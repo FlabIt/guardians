@@ -82,7 +82,7 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string ThrowIfNullOrEmpty(
-            [CanBeNull, ValidatedNotNull] this string? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
@@ -111,7 +111,7 @@ namespace FlabIt.Guardians
         [NotNull]
         [Obsolete("Will be replaced by 'ThrowIfNullOrEmpty()' in upcoming versions.")]
         public static string PassThroughNonNullNorEmpty(
-            [CanBeNull, ValidatedNotNull] this string? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
@@ -142,7 +142,7 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string ThrowIfNullOrEmptyOrWhitespace(
-            [CanBeNull, ValidatedNotNull] this string? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
@@ -167,7 +167,7 @@ namespace FlabIt.Guardians
         [NotNull]
         [Obsolete("Will be replaced by 'ThrowIfNullOrEmptyOrWhitespace()' in upcoming versions.")]
         public static string PassThroughNonNullNorEmptyNorWhitespace(
-            [CanBeNull, ValidatedNotNull] this string? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
@@ -191,7 +191,7 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string ThrowIfNullOrWhitespace(
-            [CanBeNull, ValidatedNotNull] this string? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
@@ -220,7 +220,7 @@ namespace FlabIt.Guardians
         [NotNull]
         [Obsolete("Will be replaced by 'ThrowIfNullOrWhitespace()' in upcoming versions.")]
         public static string PassThroughNonNullNorWhitespace(
-            [CanBeNull, ValidatedNotNull] this string? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
@@ -250,7 +250,7 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string ThrowIfShorterThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
             int length,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
@@ -281,7 +281,7 @@ namespace FlabIt.Guardians
         [NotNull]
         [Obsolete("Will be replaced by 'ThrowIfShorterThan()' in upcoming versions.")]
         public static string PassThroughNonShorterThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
             int length,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
@@ -312,7 +312,7 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static string ThrowIfLargerThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
             int length,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
@@ -343,7 +343,7 @@ namespace FlabIt.Guardians
         [NotNull]
         [Obsolete("Will be replaced by 'ThrowIfLargerThan()' in upcoming versions.")]
         public static string PassThroughNonLargerThan(
-            [NotNull, ValidatedNotNull] this string argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
             int length,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)

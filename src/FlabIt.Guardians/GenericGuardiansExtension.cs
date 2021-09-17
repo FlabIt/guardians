@@ -33,7 +33,7 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [NotNull]
         public static TArgument ThrowIfNull<TArgument>(
-            [CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
             where TArgument : class
@@ -61,7 +61,7 @@ namespace FlabIt.Guardians
         [NotNull]
         [Obsolete("Will be replaced by 'ThrowIfNull()' in upcoming versions.")]
         public static TArgument PassThroughNonNull<TArgument>(
-            [CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
             [CanBeNull, InvokerParameterName] string? argumentName = null,
             [CanBeNull] string? message = null)
             where TArgument : class
