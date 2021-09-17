@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -47,8 +46,6 @@ namespace FlabIt.Guardians.Tests.Exceptions
         /// Creates an instance of <see cref="Exception"/> that can be used as an inner exception for tests.
         /// </summary>
         /// <returns>A new instance of <see cref="Exception"/>.</returns>
-        [SuppressMessage(category: "Naming", checkId: "CA1303:Do not pass literals as localized parameters", Justification = "We don't want to use localized resources here.")]
-        [SuppressMessage(category: "Naming", checkId: "CA2201:Do not raise reserved exception types", Justification = "We'll just use this as a test exception.")]
         protected static Exception CreateTestInnerException()
         {
             return new Exception(message: TestInnerExceptionMessage);

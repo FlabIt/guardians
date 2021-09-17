@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using NUnit.Framework;
 
 namespace FlabIt.Guardians.Tests
 {
-    [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1121:Use built-in type alias", Justification = "Necessary for defining test cases.")]
-    [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1122:Use string.Empty for empty strings", Justification = "Necessary for defining test cases.")]
-    [SuppressMessage("ReSharper", "StringLiteralTypo", Justification = "We're constructing test cases here.")]
-    [SuppressMessage("ReSharper", "RedundantTypeSpecificationInDefaultExpression", Justification = "We're constructing test cases here.")]
     public abstract class StringGuardiansExtensionTestBase : GuardiansTestBase
     {
         public static IEnumerable<string> NullStringsTestValuesSource()
