@@ -3,7 +3,6 @@
 namespace FlabIt.Guardians.Tests
 {
     [TestFixture]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Naming like this is convention in test methods.")]
     public class TestBaseTest
     {
         [Test]

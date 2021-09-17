@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 
 namespace FlabIt.Guardians.Tests.Exceptions
 {
     [TestFixture]
-    [SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Naming like this is convention in test methods.")]
     public class ExceptionsConsistencyTest : ExceptionsTestBase
     {
         /// <summary>

@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using NUnit.Framework;
 
 namespace FlabIt.Guardians.Tests
 {
     [TestFixture]
-    [SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Naming like this is convention in test methods.")]
-    [SuppressMessage("ReSharper", "InvokeAsExtensionMethod", Justification = "We'll want to be explicit here to know what methods we actually run.")]
-    [SuppressMessage("ReSharper", "RedundantTypeSpecificationInDefaultExpression", Justification = "We'll want to be explicit here to know what types we actually use.")]
     public class GenericGuardiansExtensionTest : GuardiansTestBase
     {
         public static IEnumerable NullValuesTestValuesSource()
