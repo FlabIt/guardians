@@ -340,3 +340,7 @@ You can take a look at the source or inspect the latest test results on the [wor
 ## Benchmarks
 
 You can take a look at the source or inspect the latest benchmark results on the [workflows page](https://github.com/FlabIt/guardians/actions?query=workflow%3A%22Continuous+Delivery%22).
+
+## Release Notes
+
+You can get information about changes in this project via the [RELEASE_NOTES](./RELEASE_NOTES.md) file.

@@ -1,12 +1,18 @@
 # Release Notes
 
+## v0.8
+
+### Features
+
+* Marked PassThrough... guardians as obsolete as their ThrowIf... counterpart now is able to return validated input arguments.  
+**Note**: All PassThrough... guardians will be removed in upcoming versions!
+
 ## v0.7
 
 ### Features
 
 * Set target framework to .Net 5.0
 * Updated NuGet packages
-* Marked PassThrough... guardians as obsolete as their ThrowIf... counterpart now is able to return validated input arguments.
 
 ## v0.6
 
