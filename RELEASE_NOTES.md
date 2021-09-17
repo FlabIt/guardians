@@ -4,6 +4,7 @@
 
 ### Features
 
+* Enabled nullable reference types
 * Marked PassThrough... guardians as obsolete as their ThrowIf... counterpart now is able to return validated input arguments.  
 **Note**: All PassThrough... guardians will be removed in upcoming versions!
 
