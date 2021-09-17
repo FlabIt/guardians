@@ -185,12 +185,18 @@ For every case you want to protect your code from, there are two kind of guardia
 **ThrowIf...**
 
 These guards will prevent you from unwanted arguments by throwing an appropriate exception for the given case.  
-Otherwise, code execution just continues.
+Otherwise, the input argument will be returned and code execution just continues.
 
 **PassThroughNon...**
 
 These guards will prevent you from unwanted arguments by throwing an appropriate exception for the given case.  
 Otherwise, the input argument will be returned and code execution just continues.
+
+> **Note**:
+> The *PassThroughNon...* guardians are marked as obsolete with the latest version.
+> The main difference between *ThrowIf* and *PassThroughNon* guardians was the return value.
+> As with the latest version, all *ThrowIf* guardians also return their input argument when it successfully has been validated.  
+> This removes the need for the *PassThroughNon* guardians which is why they are now marked as obsolete. All *PassThroughNon* will be removed in upcoming versions.
 
 ### Generic Guardians
 
@@ -334,3 +340,7 @@ You can take a look at the source or inspect the latest test results on the [wor
 ## Benchmarks
 
 You can take a look at the source or inspect the latest benchmark results on the [workflows page](https://github.com/FlabIt/guardians/actions?query=workflow%3A%22Continuous+Delivery%22).
+
+## Release Notes
+
+You can get information about changes in this project via the [RELEASE_NOTES](./RELEASE_NOTES.md) file.

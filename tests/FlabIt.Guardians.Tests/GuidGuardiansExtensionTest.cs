@@ -73,6 +73,12 @@ namespace FlabIt.Guardians.Tests
             AssertThatDoesNotThrow(() => GuidGuardiansExtension.ThrowIfEmpty(testValue));
         }
 
+        [TestCaseSource(nameof(NonEmptyValuesTestValuesSource))]
+        public void When_calling_ThrowIfEmpty_with_non_empty_values_should_return_input_as_output(Guid testValue)
+        {
+            AssertThatReturnsInputAsOutputForStruct(() => GuidGuardiansExtension.ThrowIfEmpty(testValue), testValue);
+        }
+
         #endregion ThrowIfEmpty
 
         #region PassThroughNonEmpty

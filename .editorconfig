@@ -66,6 +66,8 @@ dotnet_naming_symbols.constant_fields.required_modifiers          = const
 dotnet_diagnostic.CA1822.severity = suggestion
 # CS0162: Unreachable code detected
 dotnet_diagnostic.CS0162.severity = error
+# CS0618: Type or member is obsolete
+dotnet_diagnostic.CS0618.severity = warning
 # SA1629: Documentation text should end with a period
 dotnet_diagnostic.SA1629.severity = error
 # SA1612: Element parameter documentation should match element parameters

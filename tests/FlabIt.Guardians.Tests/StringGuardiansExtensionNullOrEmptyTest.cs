@@ -114,6 +114,12 @@ namespace FlabIt.Guardians.Tests
             AssertThatDoesNotThrow(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue));
         }
 
+        [TestCaseSource(nameof(NonEmptyStringsTestValuesSource))]
+        public void When_calling_ThrowIfNullOrEmpty_with_non_empty_values_should_return_input_as_output(string testValue)
+        {
+            AssertThatReturnsInputAsOutput(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue), testValue);
+        }
+
         #endregion ThrowIfNullOrEmpty
 
         #region PassThroughNonNullNorEmpty

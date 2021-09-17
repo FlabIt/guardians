@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using FlabIt.Guardians.Exceptions;
@@ -22,7 +21,7 @@ namespace FlabIt.Guardians
             return enumerable.GetEnumerator().MoveNext();
         }
 
-        private static string GetIsEmptyErrorMessage([JetBrains.Annotations.NotNull] string argumentName, Type argumentType)
+        private static string GetIsEmptyErrorMessage(string argumentName, Type argumentType)
         {
             return string.Format(CultureInfo.InvariantCulture, Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, argumentName, argumentType.FullName);
         }
@@ -36,18 +35,20 @@ namespace FlabIt.Guardians
         /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
         /// <exception cref="ArgumentNullException">Raised when <paramref name="argument"/> is null.</exception>
         /// <exception cref="ArgumentEmptyException">Raised when <paramref name="argument"/> is empty.</exception>
+        /// <returns>The <paramref name="argument" /> when it is not null nor empty.</returns>
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfNullOrEmpty(
-            [CanBeNull, ValidatedNotNull] this IEnumerable argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+        [NotNull]
+        public static IEnumerable ThrowIfNullOrEmpty(
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this IEnumerable? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
-            argument.ThrowIfNull(argumentName, message);
+            argument = argument.ThrowIfNull(argumentName, message);
 
             if (IsNotEmpty(argument))
-                return;
+                return argument;
 
             argumentName ??= nameof(argument);
 
@@ -67,14 +68,15 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [JetBrains.Annotations.NotNull]
-        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration", Justification = "Enumerating here is inevitably.")]
+        [NotNull]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "PossibleMultipleEnumeration", Justification = "Enumerating here is inevitably.")]
+        [Obsolete("Will be replaced by 'ThrowIfNullOrEmpty()' in upcoming versions.")]
         public static IEnumerable PassThroughNonNullNorEmpty(
-            [CanBeNull, ValidatedNotNull] this IEnumerable argument,
-            [CanBeNull, InvokerParameterName] string argumentName = null,
-            [CanBeNull] string message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this IEnumerable? argument,
+            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull] string? message = null)
         {
-            argument.ThrowIfNull(argumentName, message);
+            argument = argument.ThrowIfNull(argumentName, message);
 
             if (IsNotEmpty(argument))
                 return argument;
