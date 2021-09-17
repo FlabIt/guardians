@@ -64,6 +64,8 @@ dotnet_naming_symbols.constant_fields.required_modifiers          = const
 ###################################
 # CA1822: Member Configure does not access instance data and can be marked as static (Shared in VisualBasic)
 dotnet_diagnostic.CA1822.severity = suggestion
+# CS0162: Unreachable code detected
+dotnet_diagnostic.CS0162.severity = error
 # SA1629: Documentation text should end with a period
 dotnet_diagnostic.SA1629.severity = error
 # SA1612: Element parameter documentation should match element parameters
