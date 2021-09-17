@@ -125,11 +125,15 @@ namespace FlabIt.Guardians.Tests.Exceptions
             var formatter = new BinaryFormatter();
             using var stream = new MemoryStream();
 
+#pragma warning disable SYSLIB0011 // Type or member is obsolete
             formatter.Serialize(serializationStream: stream, graph: exception);
+#pragma warning restore SYSLIB0011 // Type or member is obsolete
 
             stream.Seek(offset: 0, SeekOrigin.Begin);
 
+#pragma warning disable SYSLIB0011 // Type or member is obsolete
             return (TException)formatter.Deserialize(serializationStream: stream);
+#pragma warning restore SYSLIB0011 // Type or member is obsolete
         }
 
         protected void AssertArgumentExceptionWithDefaultValuesSerializesCorrectly<TException>(TException exception)
