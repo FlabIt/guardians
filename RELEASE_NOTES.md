@@ -1,5 +1,11 @@
 # Release Notes
 
+## v0.9
+
+### Features
+
+* Updated JetBrains.Annotations package to 2021.3.0
+
 ## v0.8
 
 ### Features
