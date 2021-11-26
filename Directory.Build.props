@@ -2,7 +2,7 @@
 <Project>
   <PropertyGroup>
     <NeutralLanguage>en</NeutralLanguage>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
   <!-- Analyzers configuration -->
   <PropertyGroup>
