@@ -38,7 +38,7 @@ namespace FlabIt.Guardians
             [CanBeNull] string? message = null)
             where TArgument : class
         {
-            if (!(argument is null))
+            if (argument is not null)
                 return argument;
 
             argumentName ??= nameof(argument);
@@ -66,7 +66,7 @@ namespace FlabIt.Guardians
             [CanBeNull] string? message = null)
             where TArgument : class
         {
-            if (!(argument is null))
+            if (argument is not null)
                 return argument;
 
             argumentName ??= nameof(argument);
