@@ -21,7 +21,7 @@ if (-not [bool]::TryParse($compress, [ref]$useCompression)) {
 
 . "./.build/functions.ps1"
 
-$codeCoveragePackageVersion = "16.11.0"
+$codeCoveragePackageVersion = "17.0.0"
 
 # Restore the Code Coverage Generator tool
 dotnet tool restore
@@ -54,7 +54,7 @@ Get-ChildItem -File -Filter *.coverage -Path $testResultsFolder -Name -Recurse |
 $reports = $reports.Substring(0, $reports.Length - 1)
 
 $targetReportDirectory = [System.IO.Path]::Combine($testResultsFolder, "coveragereport")
-dotnet tool --local run reportgenerator "-reports:$reports" "-targetdir:$targetReportDirectory" "-reporttypes:Html"
+dotnet reportgenerator "-reports:$reports" "-targetdir:$targetReportDirectory" "-reporttypes:Html"
 
 if ((ensureSuccess -stepName "Generate HTML Coverage Reports") -ne 0) {
     exit(1)
