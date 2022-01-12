@@ -275,8 +275,8 @@ namespace FlabIt.Guardians.Tests.Exceptions
             if (e is null && expectedException is null)
                 return;
 
-            Assert.IsFalse(e is null && !(expectedException is null));
-            Assert.IsFalse(!(e is null) && expectedException is null);
+            Assert.IsFalse(e is null && expectedException is not null);
+            Assert.IsFalse(e is not null && expectedException is null);
 
             Assert.AreEqual(e.StackTrace, expectedException.StackTrace, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e.StackTrace), e.StackTrace, expectedException.StackTrace));
             Assert.AreEqual(e.Message, expectedException.Message, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e), e.Message, expectedException.Message));
