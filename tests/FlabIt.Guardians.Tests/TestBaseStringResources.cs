@@ -33,7 +33,7 @@ namespace FlabIt.Guardians.Tests
         public string ExpectedExceptionOfTypeXBecauseInvalidInput(Type type) =>
             Format(
                 Properties.Resources.Test_ExpectedExceptionOfTypeXBecauseInvalidInput,
-                type.PassThroughNonNull(nameof(type)).FullName);
+                type.ThrowIfNull(nameof(type)).FullName);
 
         [DebuggerStepThrough]
         public string ExpectedInputParameterNameToMatchExceptionParameterName() =>
@@ -59,38 +59,38 @@ namespace FlabIt.Guardians.Tests
         public string ExpectedTypeToBeMarkedWithAttributeOfType(Type type, Type attributeType) =>
             Format(
                 Properties.Resources.Test_ExpectedTypeToBeMarkedWithAttributeOfType,
-                type.PassThroughNonNull(nameof(type)).FullName,
-                attributeType.PassThroughNonNull(nameof(attributeType)).FullName);
+                type.ThrowIfNull(nameof(type)).FullName,
+                attributeType.ThrowIfNull(nameof(attributeType)).FullName);
 
         [DebuggerStepThrough]
         public string ExpectedCustomExceptionsToFollowNamingConvention(string exceptionSuffix) =>
             Format(
                 Properties.Resources.Test_ExpectedCustomExceptionsToFollowNamingConvention,
-                exceptionSuffix.PassThroughNonNull(nameof(exceptionSuffix)));
+                exceptionSuffix.ThrowIfNull(nameof(exceptionSuffix)));
 
         [DebuggerStepThrough]
         public string ExpectedExceptionOfTypeXToBeSerializedAndDeserializedCorrectly(Type type) =>
             Format(
                 Properties.Resources.Test_ExpectedExceptionOfTypeXToBeSerializedAndDeserializedCorrectly,
-                type.PassThroughNonNull(nameof(type)).FullName);
+                type.ThrowIfNull(nameof(type)).FullName);
 
         [DebuggerStepThrough]
         public string ExpectedPropertyToBeSet(string propertyName) =>
             Format(
                 Properties.Resources.Test_ExpectedPropertyToBeSet,
-                propertyName.PassThroughNonNull(nameof(propertyName)));
+                propertyName.ThrowIfNull(nameof(propertyName)));
 
         [DebuggerStepThrough]
         public string ExpectedPropertyToBeNotSet(string propertyName) =>
             Format(
                 Properties.Resources.Test_ExpectedPropertyToBeNotSet,
-                propertyName.PassThroughNonNull(nameof(propertyName)));
+                propertyName.ThrowIfNull(nameof(propertyName)));
 
         [DebuggerStepThrough]
         public string ExpectedPropertyToMatch(string propertyName, [CanBeNull] object givenValue, [CanBeNull] object expectedValue) =>
             Format(
                 Properties.Resources.Test_ExpectedPropertyToMatch,
-                propertyName.PassThroughNonNullNorEmptyNorWhitespace(nameof(propertyName)),
+                propertyName.ThrowIfNullOrEmptyOrWhitespace(nameof(propertyName)),
                 expectedValue,
                 givenValue);
     }

@@ -47,29 +47,5 @@ namespace FlabIt.Guardians
 
             throw new ArgumentEmptyException(argumentName, message ?? GetIsEmptyErrorMessage(argumentName));
         }
-
-        /// <summary>
-        /// Returns the specified <paramref name="argument"/> when it is not equal to <see cref="Guid.Empty"/>. Throws an <see cref="ArgumentEmptyException"/> otherwise.
-        /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <param name="argumentName">The name of the argument that, when specified, will be used instead of the default one.</param>
-        /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
-        /// <returns>The <paramref name="argument"/>.</returns>
-        /// <exception cref="ArgumentEmptyException">Raised when <paramref name="argument"/> equals to <see cref="Guid.Empty"/>.</exception>
-        [DebuggerStepThrough]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [Obsolete("Will be replaced by 'ThrowIfEmpty()' in upcoming versions.")]
-        public static Guid PassThroughNonEmpty(
-            this Guid argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
-        {
-            if (!IsEmpty(argument))
-                return argument;
-
-            argumentName ??= nameof(argument);
-
-            throw new ArgumentEmptyException(argumentName, message ?? GetIsEmptyErrorMessage(argumentName));
-        }
     }
 }

@@ -16,7 +16,6 @@ Using guardians and following the [Fail Fast principle](https://enterprisecrafts
   - [Usage](#usage)
     - [Examples](#examples)
   - [Features](#features)
-    - [ThrowIf and PassThrough](#throwif-and-passthrough)
     - [Generic Guardians](#generic-guardians)
     - [String Guardians](#string-guardians)
     - [Guid Guardians](#guid-guardians)
@@ -25,6 +24,7 @@ Using guardians and following the [Fail Fast principle](https://enterprisecrafts
   - [Integration with ReSharper](#integration-with-resharper)
   - [Unit Tests](#unit-tests)
   - [Benchmarks](#benchmarks)
+  - [Release Notes](#release-notes)
 
 ## Installation
 
@@ -74,7 +74,7 @@ public void Bar(object argument)
 }
 ```
 
-You can also validate a value and pass it into another method or use it directly after succesful validation using the `PassThroughNon...` guardians:
+You can also validate a value and pass it into another method or use it directly after successful validation:
 
 ```cs
 using FlabIt.Guardians;
@@ -82,10 +82,10 @@ using FlabIt.Guardians;
 public void Bar(object argument)
 {
     // Specify implicit as extension method ...
-    var safeValue = argument.PassThroughNonNull();
+    var safeValue = argument.ThrowIfNull();
 
     // ... or explicitly ...
-    var safeValue = GenericGuardiansExtension.PassThroughNonNull(argument);
+    var safeValue = GenericGuardiansExtension.ThrowIfNull(argument);
 }
 ```
 
@@ -109,27 +109,6 @@ public void Bar(object argument)
 
     // Exception will contain custom argument name and custom message
     argument.ThrowIfNull(nameof(argument), "A custom message");
-}
-```
-
-... aswell as for all `PassThroughNon...` guardians:
-
-```cs
-using FlabIt.Guardians;
-
-public void Bar(object argument)
-{
-    // Exception will contain default argument name and default message
-    argument.PassThroughNonNull();
-
-    // Exception will contain custom argument name and default message
-    argument.PassThroughNonNull(nameof(argument));
-    
-    // Exception will contain default argument name and custom message
-    argument.PassThroughNonNull(message: "A custom message");
-
-    // Exception will contain custom argument name and custom message
-    argument.PassThroughNonNull(nameof(argument), "A custom message");
 }
 ```
 
@@ -163,11 +142,14 @@ public class Foo
     // The argument 'shouldNotBeNull' will be passed through to the string.Format() method when it's not null.
     // Otherwise this will throw an <see cref="System.ArgumentNullException" /> with an appropriate message.
     public void Bar(object shouldNotBeNull) =>
-        string.Format("A value: '{0}'", shouldNotBeNull.PassThroughNonNull());
+        string.Format("A value: '{0}'", shouldNotBeNull.ThrowIfNull());
 }
 ```
 
 ## Features
+
+Guardians will prevent you from invalid argument values by throwing an appropriate exception for the given case.  
+Otherwise, the input argument will be returned and code execution just continues.
 
 All Guardians follow the same pattern:
 
@@ -178,26 +160,6 @@ Besides the arguments to be checked, they also accept two optional `string` argu
 
 > **Note**: Specifying a value for `argumentName` is not required, but highly recommended.
 
-### ThrowIf and PassThrough
-
-For every case you want to protect your code from, there are two kind of guardians:
-
-**ThrowIf...**
-
-These guards will prevent you from unwanted arguments by throwing an appropriate exception for the given case.  
-Otherwise, the input argument will be returned and code execution just continues.
-
-**PassThroughNon...**
-
-These guards will prevent you from unwanted arguments by throwing an appropriate exception for the given case.  
-Otherwise, the input argument will be returned and code execution just continues.
-
-> **Note**:
-> The *PassThroughNon...* guardians are marked as obsolete with the latest version.
-> The main difference between *ThrowIf* and *PassThroughNon* guardians was the return value.
-> As with the latest version, all *ThrowIf* guardians also return their input argument when it successfully has been validated.  
-> This removes the need for the *PassThroughNon* guardians which is why they are now marked as obsolete. All *PassThroughNon* will be removed in upcoming versions.
-
 ### Generic Guardians
 
 These will help to protect you from invalid reference type values.
@@ -206,12 +168,6 @@ These will help to protect you from invalid reference type values.
 
 ```cs
 someValue.ThrowIfNull();
-```
-
-**PassThroughNonNull**
-
-```cs
-_ = someValue.PassThroughNonNull();
 ```
 
 ### String Guardians
@@ -224,34 +180,16 @@ These will help to protect you from invalid `System.String` values.
 someStringValue.ThrowIfNullOrEmpty();
 ```
 
-**PassThroughNonNullNorEmpty**
-
-```cs
-_ = someStringValue.PassThroughNonNullNorEmpty();
-```
-
 **ThrowIfNullOrEmptyOrWhitespace**
 
 ```cs
 someStringValue.ThrowIfNullOrEmptyOrWhitespace();
 ```
 
-**PassThroughNonNullNorEmptyNorWhitespace**
-
-```cs
-_ = someStringValue.PassThroughNonNullNorEmptyNorWhitespace();
-```
-
 **ThrowIfNullOrWhitespace**
 
 ```cs
 someStringValue.ThrowIfNullOrWhitespace();
-```
-
-**PassThroughNonNullNorWhitespace**
-
-```cs
-_ = someStringValue.PassThroughNonNullNorWhitespace();
 ```
 
 **ThrowIfShorterThan**
@@ -261,25 +199,11 @@ int length;
 someStringValue.ThrowIfShorterThan(length);
 ```
 
-**PassThroughNonShorterThan**
-
-```cs
-int length;
-_ = someStringValue.PassThroughNonShorterThan(length);
-```
-
 **ThrowIfLargerThan**
 
 ```cs
 int length;
 someStringValue.ThrowIfLargerThan(length);
-```
-
-**PassThroughNonLargerThan**
-
-```cs
-int length;
-_ = someStringValue.PassThroughNonLargerThan(length);
 ```
 
 ### Guid Guardians
@@ -292,12 +216,6 @@ These will help to protect you from invalid `System.Guid` values.
 someGuidValue.ThrowIfEmpty();
 ```
 
-**PassThroughNonEmpty**
-
-```cs
-_ = someGuidValue.PassThroughNonEmpty();
-```
-
 ### Enumerable Guardians
 
 These will help to protect you from invalid enumerable values.
@@ -308,12 +226,6 @@ These will help to protect you from invalid enumerable values.
 someEnumerableValue.ThrowIfNullOrEmpty();
 ```
 
-**PassThroughNonNullNorEmpty**
-
-```cs
-_ = someEnumerableValue.PassThroughNonNullNorEmpty();
-```
-
 ### Exceptions
 
 There are several different types of exceptions that might be thrown and that you can use, too.
@@ -322,7 +234,8 @@ There are several different types of exceptions that might be thrown and that yo
 - ArgumentLengthShorterThanException
 - ArgumentLengthLargerThanException
 - ArgumentWhitespaceException
-- 
+- ...
+
 ## Integration with ReSharper
 
 This package integrates very well with ReSharper since the library is fully annotated using the [JetBrains.Annotations NuGet package](https://www.nuget.org/packages/JetBrains.Annotations/).
