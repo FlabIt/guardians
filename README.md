@@ -158,8 +158,6 @@ Besides the arguments to be checked, they also accept two optional `string` argu
 - `argumentName`: When specified, will be used instead of the default argument name for the exception that might be thrown.
 - `message`: When specified, will be used instead of the default message for the exception that might be thrown.
 
-> **Note**: Specifying a value for `argumentName` is not required, but highly recommended.
-
 ### Generic Guardians
 
 These will help to protect you from invalid reference type values.

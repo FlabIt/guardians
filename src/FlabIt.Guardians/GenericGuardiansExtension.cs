@@ -34,7 +34,7 @@ namespace FlabIt.Guardians
         [NotNull]
         public static TArgument ThrowIfNull<TArgument>(
             [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
             [CanBeNull] string? message = null)
             where TArgument : class
         {

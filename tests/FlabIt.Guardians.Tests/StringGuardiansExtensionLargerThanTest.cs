@@ -19,9 +19,9 @@ namespace FlabIt.Guardians.Tests
         {
             const int testLength = 0;
 
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, nameof(testValue));
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfLargerThan(testValue, testLength), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfLargerThan(testValue, testLength), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(NullStringsTestValuesSource))]
@@ -57,11 +57,11 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(StringsLargerThanLengthTestValuesSource))]
         public void When_calling_ThrowIfLargerThan_with_values_larger_than_length_exception_argumentName_and_message_should_match_default(string testValue, int testLength)
         {
-            testValue.ThrowIfNull(nameof(testValue));
+            testValue.ThrowIfNull();
 
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXLargerThanMessageWithParamName, DefaultArgumentName, typeof(string).FullName, testLength, testValue.Length);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXLargerThanMessageWithParamName, nameof(testValue), typeof(string).FullName, testLength, testValue.Length);
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentLengthLargerThanException>(() => StringGuardiansExtension.ThrowIfLargerThan(testValue, testLength), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentLengthLargerThanException>(() => StringGuardiansExtension.ThrowIfLargerThan(testValue, testLength), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(StringsLargerThanLengthTestValuesSource))]

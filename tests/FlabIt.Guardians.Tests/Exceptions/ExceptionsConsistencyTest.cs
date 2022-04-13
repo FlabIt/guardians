@@ -19,7 +19,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
         [TestCaseSource(nameof(AllAssembliesTestCaseSource))]
         public void All_exception_types_must_be_marked_with_SerializableAttribute(Type exceptionTestType)
         {
-            exceptionTestType.ThrowIfNull(nameof(exceptionTestType));
+            exceptionTestType.ThrowIfNull();
 
             var serializableAttributeType = typeof(SerializableAttribute);
 
@@ -29,7 +29,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
         [TestCaseSource(nameof(AllAssembliesTestCaseSource))]
         public void All_exception_types_must_follow_exception_naming_conventions(Type exceptionTestType)
         {
-            exceptionTestType.ThrowIfNull(nameof(exceptionTestType));
+            exceptionTestType.ThrowIfNull();
 
             const string exceptionSuffix = "Exception";
 
