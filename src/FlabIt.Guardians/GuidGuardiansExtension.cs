@@ -37,8 +37,8 @@ namespace FlabIt.Guardians
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Guid ThrowIfEmpty(
             this Guid argument,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             if (!IsEmpty(argument))
                 return argument;

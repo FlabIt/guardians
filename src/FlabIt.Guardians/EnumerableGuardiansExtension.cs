@@ -39,11 +39,10 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static IEnumerable ThrowIfNullOrEmpty(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this IEnumerable? argument,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this IEnumerable? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
 

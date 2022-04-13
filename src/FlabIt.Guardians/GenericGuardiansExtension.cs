@@ -31,11 +31,10 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static TArgument ThrowIfNull<TArgument>(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
             where TArgument : class
         {
             if (argument is not null)

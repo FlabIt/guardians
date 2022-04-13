@@ -80,11 +80,10 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfNullOrEmpty(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
 
@@ -111,11 +110,10 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfNullOrEmptyOrWhitespace(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             return argument
                 .ThrowIfNullOrEmpty(argumentName, message)
@@ -135,11 +133,10 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfNullOrWhitespace(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
 
@@ -165,12 +162,11 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfShorterThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string argument,
             int length,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
 
@@ -196,12 +192,11 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfLargerThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string argument,
             int length,
-            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
 
