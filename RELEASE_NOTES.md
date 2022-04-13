@@ -4,6 +4,7 @@
 
 ### Features
 
+* Targeting for .NET 6.0
 * Updated JetBrains.Annotations package to 2021.3.0
 
 ## v0.8
