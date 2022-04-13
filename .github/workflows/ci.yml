@@ -33,7 +33,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.x'
+          dotnet-version: '6.0.x'
 
       - name: Run build script
         run: ./.build/run_full_pipeline.ps1 -configuration ${{ env.BUILD_CONFIGURATION }} -testResultsDirectory "${{ env.TEST_RESULTS_DIR }}" -benchmark ${{ env.RUN_BENCHMARK }} -compress ${{ env.COMPRESS_ARTIFACTS }}
