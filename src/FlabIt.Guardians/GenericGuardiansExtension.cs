@@ -45,33 +45,5 @@ namespace FlabIt.Guardians
 
             throw new ArgumentNullException(argumentName, message ?? GetIsNullErrorMessage(argumentName));
         }
-
-        /// <summary>
-        /// Returns the specified <paramref name="argument"/> when it is not null. Throws an <see cref="ArgumentNullException"/> otherwise.
-        /// </summary>
-        /// <typeparam name="TArgument">The type of <paramref name="argument"/>.</typeparam>
-        /// <param name="argument">The argument.</param>
-        /// <param name="argumentName">The name of the argument that, when specified, will be used instead of the default one.</param>
-        /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
-        /// <returns>The <paramref name="argument"/>.</returns>
-        /// <exception cref="ArgumentNullException">Raised when <paramref name="argument"/> is null.</exception>
-        [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
-        [DebuggerStepThrough]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
-        [Obsolete("Will be replaced by 'ThrowIfNull()' in upcoming versions.")]
-        public static TArgument PassThroughNonNull<TArgument>(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, NoEnumeration, ValidatedNotNull] this TArgument? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
-            where TArgument : class
-        {
-            if (argument is not null)
-                return argument;
-
-            argumentName ??= nameof(argument);
-
-            throw new ArgumentNullException(argumentName, message ?? GetIsNullErrorMessage(argumentName));
-        }
     }
 }
