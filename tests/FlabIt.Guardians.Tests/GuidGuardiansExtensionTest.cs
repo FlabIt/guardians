@@ -30,9 +30,9 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
         public void When_calling_ThrowIfEmpty_with_empty_values_exception_argumentName_and_message_should_match_default(Guid testValue)
         {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, DefaultArgumentName, typeof(Guid).FullName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, nameof(testValue), typeof(Guid).FullName);
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => GuidGuardiansExtension.ThrowIfEmpty(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => GuidGuardiansExtension.ThrowIfEmpty(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(EmptyValuesTestValuesSource))]

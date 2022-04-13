@@ -42,7 +42,7 @@ namespace FlabIt.Guardians
         [NotNull]
         public static IEnumerable ThrowIfNullOrEmpty(
             [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this IEnumerable? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
+            [CanBeNull, InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
             [CanBeNull] string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);

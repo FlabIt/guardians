@@ -17,9 +17,9 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(NullStringsTestValuesSource))]
         public void When_calling_ThrowIfNullOrWhitespace_with_null_values_exception_argumentName_and_message_should_match_default(string testValue)
         {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, nameof(testValue));
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfNullOrWhitespace(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfNullOrWhitespace(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(NullStringsTestValuesSource))]
@@ -51,11 +51,11 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(OnlyWhitespaceStringsTestValuesSource))]
         public void When_calling_ThrowIfNullOrWhitespace_with_whitespace_values_exception_argumentName_and_message_should_match_default(string testValue)
         {
-            testValue.ThrowIfNull(nameof(testValue));
+            testValue.ThrowIfNull();
 
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXOnlyWhitespaceMessageWithParamName, DefaultArgumentName, typeof(string).FullName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXOnlyWhitespaceMessageWithParamName, nameof(testValue), typeof(string).FullName);
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentWhitespaceException>(() => StringGuardiansExtension.ThrowIfNullOrWhitespace(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentWhitespaceException>(() => StringGuardiansExtension.ThrowIfNullOrWhitespace(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(OnlyWhitespaceStringsTestValuesSource))]

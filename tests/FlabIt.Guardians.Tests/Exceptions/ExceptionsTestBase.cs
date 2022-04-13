@@ -61,7 +61,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
             {
                 var assembly = Assembly.GetAssembly(typeToIdentifyAssembly);
 
-                assembly.ThrowIfNull(nameof(assembly), $"Could not resolve assembly for type '{typeToIdentifyAssembly.FullName}'.");
+                assembly.ThrowIfNull(message: $"Could not resolve assembly for type '{typeToIdentifyAssembly.FullName}'.");
 
                 yield return assembly;
             }
@@ -85,8 +85,8 @@ namespace FlabIt.Guardians.Tests.Exceptions
         /// <returns><c>True</c> when <paramref name="type"/> derives from <paramref name="derivesFrom"/>, otherwise <c>false</c>.</returns>
         protected static bool DerivesFrom(Type type, Type derivesFrom)
         {
-            type.ThrowIfNull(nameof(type));
-            derivesFrom.ThrowIfNull(nameof(derivesFrom));
+            type.ThrowIfNull();
+            derivesFrom.ThrowIfNull();
 
             if (type.BaseType == null)
                 return false;
@@ -105,8 +105,8 @@ namespace FlabIt.Guardians.Tests.Exceptions
         /// <returns><c>True</c>, when <paramref name="type"/> is marked with attribute of type <paramref name="attributeType"/>, otherwise <c>false</c>.</returns>
         protected static bool TypeIsMarkedWithAttribute(Type type, Type attributeType)
         {
-            type.ThrowIfNull(nameof(type));
-            attributeType.ThrowIfNull(nameof(attributeType));
+            type.ThrowIfNull();
+            attributeType.ThrowIfNull();
 
             return type.CustomAttributes.Any(attribute => attribute.AttributeType == attributeType);
         }
@@ -136,7 +136,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
         protected void AssertArgumentExceptionWithDefaultValuesSerializesCorrectly<TException>(TException exception)
             where TException : ArgumentException
         {
-            exception.ThrowIfNull(nameof(exception));
+            exception.ThrowIfNull();
 
             AssertArgumentExceptionSerializesCorrectly(
                 exception,
@@ -153,8 +153,8 @@ namespace FlabIt.Guardians.Tests.Exceptions
         protected void AssertArgumentExceptionWithMessageSerializesCorrectly<TException>(TException exception, string testMessage)
             where TException : ArgumentException
         {
-            exception.ThrowIfNull(nameof(exception));
-            testMessage.ThrowIfNull(nameof(testMessage));
+            exception.ThrowIfNull();
+            testMessage.ThrowIfNull();
 
             AssertArgumentExceptionSerializesCorrectly(
                 exception,
@@ -171,9 +171,9 @@ namespace FlabIt.Guardians.Tests.Exceptions
         protected void AssertArgumentExceptionWithParamNameAndMessageSerializesCorrectly<TException>(TException exception, string testMessage, string testParamName)
             where TException : ArgumentException
         {
-            exception.ThrowIfNull(nameof(exception));
-            testMessage.ThrowIfNull(nameof(testMessage));
-            testParamName.ThrowIfNull(nameof(testParamName));
+            exception.ThrowIfNull();
+            testMessage.ThrowIfNull();
+            testParamName.ThrowIfNull();
 
             AssertArgumentExceptionSerializesCorrectly(
                 exception,
@@ -190,9 +190,9 @@ namespace FlabIt.Guardians.Tests.Exceptions
         protected void AssertArgumentExceptionWithMessageAndInnerExceptionSerializesCorrectly<TException>(TException exception, string testMessage, Exception testInnerException)
             where TException : ArgumentException
         {
-            exception.ThrowIfNull(nameof(exception));
-            testMessage.ThrowIfNull(nameof(testMessage));
-            testInnerException.ThrowIfNull(nameof(testInnerException));
+            exception.ThrowIfNull();
+            testMessage.ThrowIfNull();
+            testInnerException.ThrowIfNull();
 
             AssertArgumentExceptionSerializesCorrectly(
                 exception,
@@ -209,9 +209,9 @@ namespace FlabIt.Guardians.Tests.Exceptions
         protected void AssertArgumentExceptionWithParamNameAndMessageAndInnerExceptionSerializesCorrectly<TException>(TException exception, string testMessage, string testParamName, Exception testInnerException)
             where TException : ArgumentException
         {
-            exception.ThrowIfNull(nameof(exception));
-            testMessage.ThrowIfNull(nameof(testMessage));
-            testInnerException.ThrowIfNull(nameof(testInnerException));
+            exception.ThrowIfNull();
+            testMessage.ThrowIfNull();
+            testInnerException.ThrowIfNull();
 
             AssertArgumentExceptionSerializesCorrectly(
                 exception,
@@ -227,7 +227,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
 
         protected void AssertHasCorrectMessage(Exception e, string expectedMessage)
         {
-            e.ThrowIfNull(nameof(e));
+            e.ThrowIfNull();
 
             Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.Message)));
             Assert.IsTrue(e.Message.Contains(expectedMessage, StringComparison.InvariantCulture), TestBaseStringResources.ExpectedPropertyToMatch(nameof(e.Message), e.Message, expectedMessage));
@@ -235,14 +235,14 @@ namespace FlabIt.Guardians.Tests.Exceptions
 
         protected void AssertHasSomeMessage(Exception e)
         {
-            e.ThrowIfNull(nameof(e));
+            e.ThrowIfNull();
 
             Assert.IsNotNull(e.Message, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.Message)));
         }
 
         protected void AssertHasCorrectParamName(ArgumentException e, string expectedParameterName)
         {
-            e.ThrowIfNull(nameof(e));
+            e.ThrowIfNull();
 
             Assert.IsNotNull(e.ParamName, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.ParamName)));
             Assert.AreEqual(e.ParamName, expectedParameterName, TestBaseStringResources.ExpectedPropertyToMatch(nameof(e.ParamName), e.ParamName, expectedParameterName));
@@ -250,14 +250,14 @@ namespace FlabIt.Guardians.Tests.Exceptions
 
         protected void AssertHasNoParamName(ArgumentException e)
         {
-            e.ThrowIfNull(nameof(e));
+            e.ThrowIfNull();
 
             Assert.IsNull(e.ParamName, TestBaseStringResources.ExpectedPropertyToBeNotSet(nameof(e.ParamName)));
         }
 
         protected void AssertHasCorrectInnerException(Exception e, Exception expectedInnerException)
         {
-            e.ThrowIfNull(nameof(e));
+            e.ThrowIfNull();
 
             Assert.IsNotNull(e.InnerException, TestBaseStringResources.ExpectedPropertyToBeSet(nameof(e.InnerException)));
             AssertExceptionsEqual(e.InnerException, expectedInnerException);
@@ -265,7 +265,7 @@ namespace FlabIt.Guardians.Tests.Exceptions
 
         protected void AssertHasNoInnerException(Exception e)
         {
-            e.ThrowIfNull(nameof(e));
+            e.ThrowIfNull();
 
             Assert.IsNull(e.InnerException, TestBaseStringResources.ExpectedPropertyToBeNotSet(nameof(e.InnerException)));
         }
@@ -289,8 +289,8 @@ namespace FlabIt.Guardians.Tests.Exceptions
         protected void AssertArgumentExceptionSerializesCorrectly<TException>(TException exception, Action<TException> assertExceptionState)
             where TException : ArgumentException
         {
-            exception.ThrowIfNull(nameof(exception));
-            assertExceptionState.ThrowIfNull(nameof(assertExceptionState));
+            exception.ThrowIfNull();
+            assertExceptionState.ThrowIfNull();
 
             assertExceptionState(exception);
 

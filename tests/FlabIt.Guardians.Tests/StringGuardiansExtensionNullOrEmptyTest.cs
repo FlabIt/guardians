@@ -17,9 +17,9 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(NullStringsTestValuesSource))]
         public void When_calling_ThrowIfNullOrEmpty_with_null_values_exception_argumentName_and_message_should_match_default(string testValue)
         {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, nameof(testValue));
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(NullStringsTestValuesSource))]
@@ -51,11 +51,11 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(EmptyStringsTestValuesSource))]
         public void When_calling_ThrowIfNullOrEmpty_with_empty_values_exception_argumentName_and_message_should_match_default(string testValue)
         {
-            testValue.ThrowIfNull(nameof(testValue));
+            testValue.ThrowIfNull();
 
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, DefaultArgumentName, typeof(string).FullName, testValue.Length);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, nameof(testValue), typeof(string).FullName, testValue.Length);
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(EmptyStringsTestValuesSource))]

@@ -38,9 +38,9 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(NullValuesTestValuesSource))]
         public void When_calling_ThrowIfNull_with_null_values_exception_argumentName_and_message_should_match_default(object testValue)
         {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, nameof(testValue));
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => GenericGuardiansExtension.ThrowIfNull(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => GenericGuardiansExtension.ThrowIfNull(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(NullValuesTestValuesSource))]
