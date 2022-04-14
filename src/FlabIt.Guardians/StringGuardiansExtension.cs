@@ -163,7 +163,7 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ThrowIfShorterThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string argument,
+            [ValidatedNotNull] this string argument,
             int length,
             [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
             string? message = null)
@@ -193,7 +193,7 @@ namespace FlabIt.Guardians
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ThrowIfLargerThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string argument,
+            [ValidatedNotNull] this string argument,
             int length,
             [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
             string? message = null)
