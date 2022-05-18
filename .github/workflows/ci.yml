@@ -32,7 +32,7 @@ jobs:
       - name: Run dotnet pipeline
         uses: addnab/docker-run-action@v3
         with:
-          image: dotnet-pipeline:latest
+          image: flabit/dotnet-pipeline:latest
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: docker.io
