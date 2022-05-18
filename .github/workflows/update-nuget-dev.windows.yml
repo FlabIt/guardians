@@ -3,6 +3,7 @@ name: "Update NuGet Packages"
 on:
   schedule:
     - cron:  '0 0 * * 3'
+  workflow_dispatch:
 
 env:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
