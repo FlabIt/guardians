@@ -37,6 +37,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: docker.io
           options: -v ${{ github.workspace }}:/build/source -e SOLUTION_FILE=./FlabIt.Guardians.sln -e CONFIGURATION=${{ env.BUILD_CONFIGURATION }} -e FRAMEWORK=net6.0 -e COMPRESS_ARTIFACTS=${{ env.COMPRESS_ARTIFACTS }}
+          run: |
+            sh /build/.docker-build/run_full_pipeline.sh
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
