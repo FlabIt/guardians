@@ -40,19 +40,19 @@ jobs:
         shell: pwsh
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: FlabIt.Guardians v${{ env.NBGV_AssemblyInformationalVersion }}
           path: "./artifacts.zip"
 
       - name: Code Coverage reports
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: Coverage Report v${{ env.NBGV_AssemblyInformationalVersion }}
           path: "./coverage-reports.zip"
 
       - name: Benchmark reports
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         if: env.RUN_BENCHMARK == 'true'
         with:
           name: Benchmark Report v${{ env.NBGV_AssemblyInformationalVersion }}
