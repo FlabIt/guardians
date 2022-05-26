@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -50,8 +50,10 @@ namespace FlabIt.Guardians.Tests
         {
             yield return "a";
             yield return "0";
-            yield return "   .";
             yield return ".   ";
+            yield return " .  ";
+            yield return "  . ";
+            yield return "   .";
         }
 
         public static IEnumerable StringsShorterThanLengthTestValuesSource()
