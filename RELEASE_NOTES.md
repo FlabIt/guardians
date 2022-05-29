@@ -1,5 +1,14 @@
 # Release Notes
 
+## v0.9
+
+### Features
+
+* Targeting for .NET 6.0
+* Remove PassThrough... guardians as announced in v0.8
+* Automatically determine correct argument name for exception message in case none is given
+* Updated JetBrains.Annotations package to 2021.3.0
+
 ## v0.8
 
 ### Features

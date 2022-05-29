@@ -30,9 +30,9 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
         public void When_calling_ThrowIfEmpty_with_empty_values_exception_argumentName_and_message_should_match_default(Guid testValue)
         {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, DefaultArgumentName, typeof(Guid).FullName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, nameof(testValue), typeof(Guid).FullName);
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => GuidGuardiansExtension.ThrowIfEmpty(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => GuidGuardiansExtension.ThrowIfEmpty(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
@@ -80,65 +80,5 @@ namespace FlabIt.Guardians.Tests
         }
 
         #endregion ThrowIfEmpty
-
-        #region PassThroughNonEmpty
-
-        #region Exception validation
-
-        #region ArgumentEmptyException
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonEmpty_with_empty_values_exception_argumentName_and_message_should_match_default(Guid testValue)
-        {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, DefaultArgumentName, typeof(Guid).FullName);
-
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => _ = GuidGuardiansExtension.PassThroughNonEmpty(testValue), defaultMessage);
-        }
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonEmpty_with_empty_values_with_custom_argumentName_exception_argumentName_should_match(Guid testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameShouldMatchCustomArgumentName<ArgumentEmptyException>(() => _ = GuidGuardiansExtension.PassThroughNonEmpty(testValue, testValueParamName), testValueParamName);
-        }
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonEmpty_with_empty_values_with_custom_message_exception_message_should_match(Guid testValue)
-        {
-            AssertThatExceptionMessageShouldMatchCustomMessage<ArgumentEmptyException>(() => _ = GuidGuardiansExtension.PassThroughNonEmpty(testValue, message: TestCustomExceptionMessage));
-        }
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonEmpty_with_empty_values_with_custom_argumentName_and_custom_message_exception_properties_should_match(Guid testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameAndMessageShouldMatch<ArgumentEmptyException>(() => _ = GuidGuardiansExtension.PassThroughNonEmpty(testValue, testValueParamName, TestCustomExceptionMessage), testValueParamName, TestCustomExceptionMessage);
-        }
-
-        #endregion ArgumentEmptyException
-
-        #endregion Exception validation
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonEmpty_with_empty_values_should_throw_ArgumentEmptyException(Guid testValue)
-        {
-            AssertThatThrows<ArgumentEmptyException>(() => _ = GuidGuardiansExtension.PassThroughNonEmpty(testValue));
-        }
-
-        [TestCaseSource(nameof(NonEmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonEmpty_with_non_empty_values_should_not_throw(Guid testValue)
-        {
-            AssertThatDoesNotThrow(() => _ = GuidGuardiansExtension.PassThroughNonEmpty(testValue));
-        }
-
-        [TestCaseSource(nameof(NonEmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonEmpty_with_non_empty_values_should_return_input_as_output(Guid testValue)
-        {
-            AssertThatReturnsInputAsOutputForStruct(() => GuidGuardiansExtension.PassThroughNonEmpty(testValue), testValue);
-        }
-
-        #endregion PassThroughNonEmpty
     }
 }

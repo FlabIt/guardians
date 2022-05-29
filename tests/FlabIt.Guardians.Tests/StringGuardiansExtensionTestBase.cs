@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using NUnit.Framework;
 
 namespace FlabIt.Guardians.Tests
@@ -14,44 +15,34 @@ namespace FlabIt.Guardians.Tests
             yield return default(string);
         }
 
-        public static IEnumerable<string> NonNullStringsTestValuesSource()
+        public static IEnumerable NonNullStringsTestValuesSource()
         {
-            yield return " ";
-            yield return "0";
-            yield return "A";
-            yield return "Aa";
+            return NonEmptyNonWhitespaceCharacters()
+                .Concat(EmptyStrings())
+                .Concat(WhitespaceStrings())
+                .Concat(NonOnlyWhitespaceStrings());
         }
 
         public static IEnumerable EmptyStringsTestValuesSource()
         {
-            yield return "";
-            yield return string.Empty;
-            yield return String.Empty;
-            yield return "1".Remove(0, 1);
+            return EmptyStrings();
         }
 
         public static IEnumerable NonEmptyStringsTestValuesSource()
         {
-            yield return " ";
-            yield return "0";
-            yield return "A";
-            yield return "Aa";
+            return NonEmptyNonWhitespaceCharacters()
+                .Concat(WhitespaceStrings())
+                .Concat(NonOnlyWhitespaceStrings());
         }
 
         public static IEnumerable OnlyWhitespaceStringsTestValuesSource()
         {
-            yield return ' '.ToString(CultureInfo.InvariantCulture);
-            yield return " ";
-            yield return "  ";
-            yield return "   ";
+            return WhitespaceStrings();
         }
 
         public static IEnumerable NonOnlyWhitespaceStringsTestValuesSource()
         {
-            yield return "a";
-            yield return "0";
-            yield return "   .";
-            yield return ".   ";
+            return NonOnlyWhitespaceStrings();
         }
 
         public static IEnumerable StringsShorterThanLengthTestValuesSource()
@@ -116,6 +107,39 @@ namespace FlabIt.Guardians.Tests
             yield return new TestCaseData("asd", 10);
             yield return new TestCaseData("Test", 4);
             yield return new TestCaseData("Test", 10);
+        }
+
+        private static IEnumerable<string> NonEmptyNonWhitespaceCharacters()
+        {
+            yield return "0";
+            yield return "A";
+            yield return "Aa";
+        }
+
+        private static IEnumerable<string> EmptyStrings()
+        {
+            yield return "";
+            yield return string.Empty;
+            yield return String.Empty;
+            yield return "1".Remove(0, 1);
+        }
+
+        private static IEnumerable<string> WhitespaceStrings()
+        {
+            yield return ' '.ToString(CultureInfo.InvariantCulture);
+            yield return " ";
+            yield return "  ";
+            yield return "   ";
+        }
+
+        private static IEnumerable<string> NonOnlyWhitespaceStrings()
+        {
+            yield return "a";
+            yield return "0";
+            yield return ".   ";
+            yield return " .  ";
+            yield return "  . ";
+            yield return "   .";
         }
     }
 }

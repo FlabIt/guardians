@@ -8,29 +8,24 @@ namespace FlabIt.Guardians.Tests
     {
         protected const string TestCustomExceptionMessage = "Please provide a valid value.";
 
-        /// <summary>
-        /// The name of the guardians value parameter in the source code.
-        /// </summary>
-        protected const string DefaultArgumentName = "argument";
-
         protected void AssertThatThrows<TException>(TestDelegate assertThat)
             where TException : ArgumentException
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
+            assertThat.ThrowIfNull();
 
             Assert.Throws<TException>(assertThat, TestBaseStringResources.ExpectedExceptionOfTypeXBecauseInvalidInput(typeof(TException)));
         }
 
         protected void AssertThatDoesNotThrow(TestDelegate assertThat)
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
+            assertThat.ThrowIfNull();
 
             Assert.DoesNotThrow(assertThat, TestBaseStringResources.ExpectedNoExceptionBecauseValidInput());
         }
 
         protected void AssertThatReturnsInputAsOutput<T>(Func<T> assertThat, object testValue)
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
+            assertThat.ThrowIfNull();
 
             var output = assertThat();
 
@@ -41,29 +36,31 @@ namespace FlabIt.Guardians.Tests
         protected void AssertThatReturnsInputAsOutputForStruct<T>(Func<T> assertThat, object testValue)
             where T : struct
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
+            assertThat.ThrowIfNull();
 
             var output = assertThat();
 
             Assert.AreEqual(testValue, output, TestBaseStringResources.ExpectedOutputIsEqualToInput());
         }
 
-        protected void AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<TException>(TestDelegate assertThat, string defaultMessage)
+        protected void AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<TException>(
+            TestDelegate assertThat, string defaultMessage, string argumentName)
             where TException : ArgumentException
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
-            defaultMessage.ThrowIfNull(nameof(defaultMessage));
+            assertThat.ThrowIfNull();
+            defaultMessage.ThrowIfNull();
+            argumentName.ThrowIfNull();
 
             var exception = Assert.Throws<TException>(assertThat, TestBaseStringResources.ExpectedExceptionOfTypeXBecauseInvalidInput(typeof(TException)));
 
             Assert.IsTrue(exception.Message.Contains(defaultMessage, StringComparison.CurrentCulture), TestBaseStringResources.ExpectedMessageToMatchExceptionMessage());
-            Assert.AreEqual(DefaultArgumentName, exception.ParamName, TestBaseStringResources.ExpectedInputParameterNameToMatchExceptionParameterName());
+            Assert.AreEqual(argumentName, exception.ParamName, TestBaseStringResources.ExpectedInputParameterNameToMatchExceptionParameterName());
         }
 
         protected void AssertThatExceptionParamNameShouldMatchCustomArgumentName<TException>(TestDelegate assertThat, string customArgumentName)
             where TException : ArgumentException
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
+            assertThat.ThrowIfNull();
 
             var exception = Assert.Throws<TException>(assertThat, TestBaseStringResources.ExpectedExceptionOfTypeXBecauseInvalidInput(typeof(TException)));
 
@@ -73,7 +70,7 @@ namespace FlabIt.Guardians.Tests
         protected void AssertThatExceptionMessageShouldMatchCustomMessage<TException>(TestDelegate assertThat)
             where TException : Exception
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
+            assertThat.ThrowIfNull();
 
             var exception = Assert.Throws<TException>(assertThat, TestBaseStringResources.ExpectedExceptionOfTypeXBecauseInvalidInput(typeof(TException)));
 
@@ -83,8 +80,8 @@ namespace FlabIt.Guardians.Tests
         protected void AssertThatExceptionParamNameAndMessageShouldMatch<TException>(TestDelegate assertThat, [CanBeNull] string customArgumentName, string expectedMessage)
             where TException : ArgumentException
         {
-            assertThat.ThrowIfNull(nameof(assertThat));
-            expectedMessage.ThrowIfNull(nameof(expectedMessage));
+            assertThat.ThrowIfNull();
+            expectedMessage.ThrowIfNull();
 
             var exception = Assert.Throws<TException>(assertThat, TestBaseStringResources.ExpectedExceptionOfTypeXBecauseInvalidInput(typeof(TException)));
 

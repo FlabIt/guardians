@@ -80,40 +80,10 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfNullOrEmpty(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
-        {
-            argument = argument.ThrowIfNull(argumentName, message);
-
-            if (!IsEmpty(argument))
-                return argument;
-
-            argumentName ??= nameof(argument);
-
-            throw new ArgumentEmptyException(argumentName, message ?? GetIsEmptyErrorMessage(argumentName));
-        }
-
-        /// <summary>
-        /// Returns the specified <paramref name="argument"/> when it is not empty.
-        /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <param name="argumentName">The name of the argument that, when specified, will be used instead of the default one.</param>
-        /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
-        /// <returns>The <paramref name="argument"/>.</returns>
-        /// <exception cref="ArgumentNullException">Raised when <paramref name="argument"/> is null.</exception>
-        /// <exception cref="ArgumentEmptyException">Raised when <paramref name="argument"/> is empty.</exception>
-        [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
-        [DebuggerStepThrough]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
-        [Obsolete("Will be replaced by 'ThrowIfNullOrEmpty()' in upcoming versions.")]
-        public static string PassThroughNonNullNorEmpty(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
 
@@ -140,40 +110,14 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfNullOrEmptyOrWhitespace(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             return argument
                 .ThrowIfNullOrEmpty(argumentName, message)
                 .ThrowIfNullOrWhitespace(argumentName, message);
-        }
-
-        /// <summary>
-        /// Returns the specified <paramref name="argument"/> when it is not null nor empty nor consists only of whitespaces.
-        /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <param name="argumentName">The name of the argument that, when specified, will be used instead of the default one.</param>
-        /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
-        /// <returns>The <paramref name="argument"/>.</returns>
-        /// <exception cref="ArgumentNullException">Raised when <paramref name="argument"/> is null.</exception>
-        /// <exception cref="ArgumentEmptyException">Raised when <paramref name="argument"/> is empty.</exception>
-        /// <exception cref="ArgumentWhitespaceException">Raised when <paramref name="argument"/> consists only of whitespaces.</exception>
-        [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
-        [DebuggerStepThrough]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
-        [Obsolete("Will be replaced by 'ThrowIfNullOrEmptyOrWhitespace()' in upcoming versions.")]
-        public static string PassThroughNonNullNorEmptyNorWhitespace(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
-        {
-            argument.ThrowIfNullOrEmpty(argumentName, message);
-
-            return argument.PassThroughNonNullNorWhitespace(argumentName, message);
         }
 
         /// <summary>
@@ -189,40 +133,10 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfNullOrWhitespace(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
-        {
-            argument = argument.ThrowIfNull(argumentName, message);
-
-            if (!IsOnlyWhitespaces(argument))
-                return argument;
-
-            argumentName ??= nameof(argument);
-
-            throw new ArgumentWhitespaceException(argumentName, message ?? GetIsOnlyWhitespacesErrorMessage(argumentName));
-        }
-
-        /// <summary>
-        /// Returns the specified <paramref name="argument"/> when it does not consist only of whitespaces.
-        /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <param name="argumentName">The name of the argument that, when specified, will be used instead of the default one.</param>
-        /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
-        /// <returns>The <paramref name="argument"/>.</returns>
-        /// <exception cref="ArgumentNullException">Raised when <paramref name="argument"/> is null.</exception>
-        /// <exception cref="ArgumentWhitespaceException">Raised when <paramref name="argument"/> consists only of whitespaces.</exception>
-        [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
-        [DebuggerStepThrough]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
-        [Obsolete("Will be replaced by 'ThrowIfNullOrWhitespace()' in upcoming versions.")]
-        public static string PassThroughNonNullNorWhitespace(
-            [System.Diagnostics.CodeAnalysis.NotNull, CanBeNull, ValidatedNotNull] this string? argument,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [System.Diagnostics.CodeAnalysis.NotNull, ValidatedNotNull] this string? argument,
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
 
@@ -248,45 +162,13 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfShorterThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
+            [ValidatedNotNull] this string argument,
             int length,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
-
-            if (!IsShorterThan(argument, length))
-                return argument;
-
-            argumentName ??= nameof(argument);
-
-            throw new ArgumentLengthShorterThanException(argumentName, message ?? GetIsShorterThanErrorMessage(argumentName, length, argument.Length));
-        }
-
-        /// <summary>
-        /// Returns the specified <paramref name="argument"/> when it is not shorter than the given <paramref name="length"/>.
-        /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <param name="length">The length threshold.</param>
-        /// <param name="argumentName">The name of the argument that, when specified, will be used instead of the default one.</param>
-        /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
-        /// <returns>The <paramref name="argument"/>.</returns>
-        /// <exception cref="ArgumentNullException">Raised when <paramref name="argument"/> is null.</exception>
-        /// <exception cref="ArgumentLengthShorterThanException">Raised when <paramref name="argument"/> is larger than or equal to <paramref name="length"/>.</exception>
-        [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
-        [DebuggerStepThrough]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
-        [Obsolete("Will be replaced by 'ThrowIfShorterThan()' in upcoming versions.")]
-        public static string PassThroughNonShorterThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
-            int length,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
-        {
-            argument.ThrowIfNull(argumentName, message);
 
             if (!IsShorterThan(argument, length))
                 return argument;
@@ -310,45 +192,13 @@ namespace FlabIt.Guardians
         [ContractAnnotation("argument:null => halt")]
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
         public static string ThrowIfLargerThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
+            [ValidatedNotNull] this string argument,
             int length,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
+            [InvokerParameterName, CallerArgumentExpression("argument")] string? argumentName = null,
+            string? message = null)
         {
             argument = argument.ThrowIfNull(argumentName, message);
-
-            if (!IsLargerThan(argument, length))
-                return argument;
-
-            argumentName ??= nameof(argument);
-
-            throw new ArgumentLengthLargerThanException(argumentName, message ?? GetIsLargerThanErrorMessage(argumentName, length, argument.Length));
-        }
-
-        /// <summary>
-        /// Returns the specified <paramref name="argument"/> when it is not larger than the given <paramref name="length"/>.
-        /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <param name="length">The length threshold.</param>
-        /// <param name="argumentName">The name of the argument that, when specified, will be used instead of the default one.</param>
-        /// <param name="message">A custom message that, when specified, will be used instead of the default one.</param>
-        /// <returns>The <paramref name="argument"/>.</returns>
-        /// <exception cref="ArgumentNullException">Raised when <paramref name="argument"/> is null.</exception>
-        /// <exception cref="ArgumentLengthLargerThanException">Raised when <paramref name="argument"/> is larger than <paramref name="length"/>.</exception>
-        [ContractAnnotation("argument:notnull => notnull; argument:null => halt")]
-        [DebuggerStepThrough]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [NotNull]
-        [Obsolete("Will be replaced by 'ThrowIfLargerThan()' in upcoming versions.")]
-        public static string PassThroughNonLargerThan(
-            [System.Diagnostics.CodeAnalysis.NotNull, NotNull, ValidatedNotNull] this string argument,
-            int length,
-            [CanBeNull, InvokerParameterName] string? argumentName = null,
-            [CanBeNull] string? message = null)
-        {
-            argument.ThrowIfNull(argumentName, message);
 
             if (!IsLargerThan(argument, length))
                 return argument;

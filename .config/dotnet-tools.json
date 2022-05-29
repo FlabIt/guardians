@@ -8,10 +8,10 @@
         "reportgenerator"
       ]
     },
-    "nukeeper": {
-      "version": "0.34.0",
+    "nbgv": {
+      "version": "3.5.107",
       "commands": [
-        "nukeeper"
+        "nbgv"
       ]
     }
   }

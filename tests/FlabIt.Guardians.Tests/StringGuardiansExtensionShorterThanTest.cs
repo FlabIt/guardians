@@ -19,9 +19,9 @@ namespace FlabIt.Guardians.Tests
         {
             const int testLength = 0;
 
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, nameof(testValue));
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfShorterThan(testValue, testLength), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfShorterThan(testValue, testLength), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(NullStringsTestValuesSource))]
@@ -57,11 +57,11 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(StringsShorterThanLengthTestValuesSource))]
         public void When_calling_ThrowIfShorterThan_with_values_larger_than_length_exception_argumentName_and_message_should_match_default(string testValue, int testLength)
         {
-            testValue.ThrowIfNull(nameof(testValue));
+            testValue.ThrowIfNull();
 
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXShorterThanMessageWithParamName, DefaultArgumentName, typeof(string).FullName, testLength, testValue.Length);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXShorterThanMessageWithParamName, nameof(testValue), typeof(string).FullName, testLength, testValue.Length);
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentLengthShorterThanException>(() => StringGuardiansExtension.ThrowIfShorterThan(testValue, testLength), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentLengthShorterThanException>(() => StringGuardiansExtension.ThrowIfShorterThan(testValue, testLength), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(StringsShorterThanLengthTestValuesSource))]
@@ -123,115 +123,5 @@ namespace FlabIt.Guardians.Tests
         }
 
         #endregion ThrowIfShorterThan
-
-        #region PassThroughNonShorterThan
-
-        #region Exception validation
-
-        #region ArgumentNullException
-
-        [TestCaseSource(nameof(NullStringsTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_null_values_exception_argumentName_and_message_should_match_default(string testValue)
-        {
-            const int testLength = 0;
-
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
-
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength), defaultMessage);
-        }
-
-        [TestCaseSource(nameof(NullStringsTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_null_values_with_custom_argumentName_exception_argumentName_should_match(string testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-            const int testLength = 0;
-
-            AssertThatExceptionParamNameShouldMatchCustomArgumentName<ArgumentNullException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength, testValueParamName), testValueParamName);
-        }
-
-        [TestCaseSource(nameof(NullStringsTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_null_values_with_custom_message_exception_message_should_match(string testValue)
-        {
-            const int testLength = 0;
-
-            AssertThatExceptionMessageShouldMatchCustomMessage<ArgumentNullException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength, message: TestCustomExceptionMessage));
-        }
-
-        [TestCaseSource(nameof(NullStringsTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_null_values_with_custom_argumentName_and_custom_message_exception_properties_should_match(string testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-            const int testLength = 0;
-
-            AssertThatExceptionParamNameAndMessageShouldMatch<ArgumentNullException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength, testValueParamName, TestCustomExceptionMessage), testValueParamName, TestCustomExceptionMessage);
-        }
-
-        #endregion ArgumentNullException
-
-        #region ArgumentLengthShorterThanException
-
-        [TestCaseSource(nameof(StringsShorterThanLengthTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_values_larger_than_length_exception_argumentName_and_message_should_match_default(string testValue, int testLength)
-        {
-            testValue.ThrowIfNull(nameof(testValue));
-
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXShorterThanMessageWithParamName, DefaultArgumentName, typeof(string).FullName, testLength, testValue.Length);
-
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentLengthShorterThanException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength), defaultMessage);
-        }
-
-        [TestCaseSource(nameof(StringsShorterThanLengthTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_values_larger_than_length_with_custom_argumentName_exception_argumentName_should_match(string testValue, int testLength)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameShouldMatchCustomArgumentName<ArgumentLengthShorterThanException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength, testValueParamName), testValueParamName);
-        }
-
-        [TestCaseSource(nameof(StringsShorterThanLengthTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_values_larger_than_length_with_custom_message_exception_message_should_match(string testValue, int testLength)
-        {
-            AssertThatExceptionMessageShouldMatchCustomMessage<ArgumentLengthShorterThanException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength, message: TestCustomExceptionMessage));
-        }
-
-        [TestCaseSource(nameof(StringsShorterThanLengthTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_values_larger_than_length_with_custom_argumentName_and_custom_message_exception_properties_should_match(string testValue, int testLength)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameAndMessageShouldMatch<ArgumentLengthShorterThanException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength, testValueParamName, TestCustomExceptionMessage), testValueParamName, TestCustomExceptionMessage);
-        }
-
-        #endregion ArgumentLengthShorterThanException
-
-        #endregion Exception validation
-
-        [TestCaseSource(nameof(NullStringsTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_null_values_should_throw_ArgumentNullException(string testValue)
-        {
-            const int testLength = 0;
-
-            AssertThatThrows<ArgumentNullException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength));
-        }
-
-        [TestCaseSource(nameof(StringsLargerThanOrEqualToLengthTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_non_null_values_should_not_throw(string testValue, int testLength)
-        {
-            AssertThatReturnsInputAsOutput(() => StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength), testValue);
-        }
-
-        [TestCaseSource(nameof(StringsShorterThanLengthTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_values_shorter_than_length_should_throw_ArgumentLengthShorterThanException(string testValue, int testLength)
-        {
-            AssertThatThrows<ArgumentLengthShorterThanException>(() => _ = StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength));
-        }
-
-        [TestCaseSource(nameof(StringsLargerThanOrEqualToLengthTestValuesSource))]
-        public void When_calling_PassThroughNonShorterThan_with_values_larger_than_or_equal_to_length_should_return_input_as_output(string testValue, int testLength)
-        {
-            AssertThatReturnsInputAsOutput(() => StringGuardiansExtension.PassThroughNonShorterThan(testValue, testLength), testValue);
-        }
-
-        #endregion PassThroughNonShorterThan
     }
 }

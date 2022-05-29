@@ -54,9 +54,9 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(NullValuesTestValuesSource))]
         public void When_calling_ThrowIfNullOrEmpty_with_null_values_exception_argumentName_and_message_should_match_default(IEnumerable testValue)
         {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, nameof(testValue));
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => EnumerableGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => EnumerableGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(NullValuesTestValuesSource))]
@@ -88,11 +88,11 @@ namespace FlabIt.Guardians.Tests
         [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
         public void When_calling_ThrowIfNullOrEmpty_with_empty_values_exception_argumentName_and_message_should_match_default(IEnumerable testValue)
         {
-            testValue.ThrowIfNull(nameof(testValue));
+            testValue.ThrowIfNull();
 
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, DefaultArgumentName, testValue.GetType().FullName);
+            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, nameof(testValue), testValue.GetType().FullName);
 
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => EnumerableGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage);
+            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => EnumerableGuardiansExtension.ThrowIfNullOrEmpty(testValue), defaultMessage, nameof(testValue));
         }
 
         [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
@@ -152,107 +152,5 @@ namespace FlabIt.Guardians.Tests
         }
 
         #endregion ThrowIfNullOrEmpty
-
-        #region PassThroughNonNullNorEmpty
-
-        #region Exception validation
-
-        #region ArgumentNullException
-
-        [TestCaseSource(nameof(NullValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_null_values_exception_argumentName_and_message_should_match_default(IEnumerable testValue)
-        {
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentNullMessageWithParamName, DefaultArgumentName);
-
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentNullException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue), defaultMessage);
-        }
-
-        [TestCaseSource(nameof(NullValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_null_values_with_custom_argumentName_exception_argumentName_should_match(IEnumerable testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameShouldMatchCustomArgumentName<ArgumentNullException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue, testValueParamName), testValueParamName);
-        }
-
-        [TestCaseSource(nameof(NullValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_null_values_with_custom_message_exception_message_should_match(IEnumerable testValue)
-        {
-            AssertThatExceptionMessageShouldMatchCustomMessage<ArgumentNullException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue, message: TestCustomExceptionMessage));
-        }
-
-        [TestCaseSource(nameof(NullValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_null_values_with_custom_argumentName_and_custom_message_exception_properties_should_match(IEnumerable testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameAndMessageShouldMatch<ArgumentNullException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue, testValueParamName, TestCustomExceptionMessage), testValueParamName, TestCustomExceptionMessage);
-        }
-
-        #endregion ArgumentNullException
-
-        #region ArgumentEmptyException
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_empty_values_exception_argumentName_and_message_should_match_default(IEnumerable testValue)
-        {
-            testValue.ThrowIfNull(nameof(testValue));
-
-            var defaultMessage = string.Format(CultureInfo.InvariantCulture, FlabIt.Guardians.Properties.Resources.Exception_ArgumentOfTypeXEmptyMessageWithParamName, DefaultArgumentName, testValue.GetType().FullName);
-
-            AssertThatExceptionParamNameAndMessageShouldMatchDefaultArgumentName<ArgumentEmptyException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue), defaultMessage);
-        }
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_empty_values_with_custom_argumentName_exception_argumentName_should_match(IEnumerable testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameShouldMatchCustomArgumentName<ArgumentEmptyException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue, testValueParamName), testValueParamName);
-        }
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_empty_values_with_custom_message_exception_message_should_match(IEnumerable testValue)
-        {
-            AssertThatExceptionMessageShouldMatchCustomMessage<ArgumentEmptyException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue, message: TestCustomExceptionMessage));
-        }
-
-        [TestCaseSource(nameof(EmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_empty_values_with_custom_argumentName_and_custom_message_exception_properties_should_match(IEnumerable testValue)
-        {
-            const string testValueParamName = nameof(testValue);
-
-            AssertThatExceptionParamNameAndMessageShouldMatch<ArgumentEmptyException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue, testValueParamName, TestCustomExceptionMessage), testValueParamName, TestCustomExceptionMessage);
-        }
-
-        #endregion ArgumentEmptyException
-
-        #endregion Exception validation
-
-        [TestCaseSource(nameof(NullValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_null_values_should_throw_ArgumentNullException(IEnumerable testValue)
-        {
-            AssertThatThrows<ArgumentNullException>(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue));
-        }
-
-        [TestCaseSource(nameof(NonNullValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_non_null_values_should_not_throw(IEnumerable testValue)
-        {
-            AssertThatDoesNotThrow(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue));
-        }
-
-        [TestCaseSource(nameof(NonEmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_non_empty_values_should_not_throw(IEnumerable testValue)
-        {
-            AssertThatDoesNotThrow(() => _ = EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue));
-        }
-
-        [TestCaseSource(nameof(NonEmptyValuesTestValuesSource))]
-        public void When_calling_PassThroughNonNullNorEmpty_with_non_empty_values_should_return_input_as_output(IEnumerable testValue)
-        {
-            AssertThatReturnsInputAsOutput(() => EnumerableGuardiansExtension.PassThroughNonNullNorEmpty(testValue), testValue);
-        }
-
-        #endregion PassThroughNonNullNorEmpty
     }
 }
