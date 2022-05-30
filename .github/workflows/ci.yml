@@ -9,9 +9,9 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   BUILD_CONFIGURATION: "Release"
+  DOTNET_FRAMEWORK: "net6.0"
   TEST_RESULTS_DIR: "./test-results/"
   RUN_BENCHMARK: "false"
-  COMPRESS_ARTIFACTS: "true"
 
 jobs:
   build:
@@ -29,16 +29,20 @@ jobs:
         with:
           setAllVars: true
 
-      - name: Run dotnet pipeline
+      - name: CI
         uses: addnab/docker-run-action@v3
         with:
-          image: flabit/dotnet-pipeline:latest
+          image: flabit/dotnet-pipeline:0.1
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: docker.io
-          options: -v ${{ github.workspace }}:/build/source -e SOLUTION_FILE=./FlabIt.Guardians.sln -e CONFIGURATION=${{ env.BUILD_CONFIGURATION }} -e FRAMEWORK=net6.0 -e COMPRESS_ARTIFACTS=${{ env.COMPRESS_ARTIFACTS }}
+          options: -v ${{ github.workspace }}:/build/source -e SOLUTION_FILE=./FlabIt.Guardians.sln -e CONFIGURATION=${{ env.BUILD_CONFIGURATION }} -e FRAMEWORK=${{ env.DOTNET_FRAMEWORK }}
           run: |
-            sh /build/.docker-build/run_full_pipeline.sh
+            sh /scripts/.docker-build/run_full_pipeline.sh
+
+      - name: Compress artifacts
+        run: |
+          tar -tzvf ./src/FlabIt.Guardians/bin/Release/FlabIt.Guardians.${{ env.NBGV_AssemblyInformationalVersion }}.nupkg
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
