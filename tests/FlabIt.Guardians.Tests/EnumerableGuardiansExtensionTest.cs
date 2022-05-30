@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,9 +26,9 @@ namespace FlabIt.Guardians.Tests
 
         public static IEnumerable NonNullValuesTestValuesSource()
         {
-            yield return new int[] { 1, 2 };
+            yield return new [] { 1, 2 };
             yield return new double[] { 1, 2 };
-            yield return new List<object>() { new object() };
+            yield return new List<object> { new object() };
         }
 
         public static IEnumerable EmptyValuesTestValuesSource()
@@ -40,9 +40,9 @@ namespace FlabIt.Guardians.Tests
 
         public static IEnumerable NonEmptyValuesTestValuesSource()
         {
-            yield return new List<int>() { 1 };
-            yield return new List<object>() { new object() };
-            yield return new int[] { 1, 2 };
+            yield return new List<int> { 1 };
+            yield return new List<object> { new object() };
+            yield return new[] { 1, 2 };
         }
 
         #region ThrowIfNullOrEmpty
