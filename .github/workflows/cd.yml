@@ -12,7 +12,6 @@ env:
   IS_PRERELEASE: "true"
   NUGET_PACKAGES_SOURCE_NAME: "nuget.org"
   TEST_RESULTS_DIR: "./test-results/"
-  RUN_BENCHMARK: "false"
   COMPRESS_ARTIFACTS: "true"
 
 jobs:
@@ -37,7 +36,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Run build script
-        run: ./.build/run_full_pipeline.ps1 -configuration ${{ env.BUILD_CONFIGURATION }} -testResultsDirectory "${{ env.TEST_RESULTS_DIR }}" -benchmark ${{ env.RUN_BENCHMARK }} -compress ${{ env.COMPRESS_ARTIFACTS }}
+        run: ./.build/run_full_pipeline.ps1 -configuration ${{ env.BUILD_CONFIGURATION }} -testResultsDirectory "${{ env.TEST_RESULTS_DIR }}" -compress ${{ env.COMPRESS_ARTIFACTS }}
         shell: pwsh
 
       - name: Upload build artifacts
@@ -51,13 +50,6 @@ jobs:
         with:
           name: Coverage Report v${{ env.NBGV_AssemblyInformationalVersion }}
           path: "./coverage-reports.zip"
-
-      - name: Benchmark reports
-        uses: actions/upload-artifact@v1
-        if: env.RUN_BENCHMARK == 'true'
-        with:
-          name: Benchmark Report v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "./benchmark-reports.zip"
 
       - name: Publish NuGet package(s)
         run: ./.build/publish_nuget_packages.ps1 -source ${{ env.NUGET_PACKAGES_SOURCE_NAME }} -token ${{ secrets.NUGET_PACKAGES_SOURCE_TOKEN }}

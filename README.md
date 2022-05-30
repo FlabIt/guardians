@@ -23,7 +23,6 @@ Using guardians and following the [Fail Fast principle](https://enterprisecrafts
     - [Exceptions](#exceptions)
   - [Integration with ReSharper](#integration-with-resharper)
   - [Unit Tests](#unit-tests)
-  - [Benchmarks](#benchmarks)
   - [Release Notes](#release-notes)
 
 ## Installation
@@ -247,10 +246,6 @@ This package integrates very well with ReSharper since the library is fully anno
 This library is extensively unit tested.
 
 You can take a look at the source or inspect the latest test results on the [workflows page](https://github.com/FlabIt/guardians/actions?query=workflow%3A%22Continuous+Delivery%22).
-
-## Benchmarks
-
-You can take a look at the source or inspect the latest benchmark results on the [workflows page](https://github.com/FlabIt/guardians/actions?query=workflow%3A%22Continuous+Delivery%22).
 
 ## Release Notes
 
