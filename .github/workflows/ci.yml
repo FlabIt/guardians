@@ -42,13 +42,13 @@ jobs:
 
       - name: Compress artifacts
         run: |
-          tar -tzvf ./src/FlabIt.Guardians/bin/**/*.nupkg
+          tar -cf artifacts.tar ./src/FlabIt.Guardians/bin/**/*.nupkg
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
           name: FlabIt.Guardians v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "./artifacts.zip"
+          path: "./artifacts.tar"
 
       - name: Code Coverage reports
         uses: actions/upload-artifact@v1
