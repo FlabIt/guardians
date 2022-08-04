@@ -42,7 +42,7 @@ jobs:
 
       - name: Compress artifacts
         run: |
-          tar -tzvf ./src/FlabIt.Guardians/bin/Release/FlabIt.Guardians.${{ env.NBGV_AssemblyInformationalVersion }}.nupkg
+          tar -tzvf ./src/FlabIt.Guardians/bin/**/*.nupkg
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
