@@ -21,7 +21,7 @@ if (-not [bool]::TryParse($compress, [ref]$useCompression)) {
 
 . "./.build/functions.ps1"
 
-$codeCoveragePackageVersion = "17.1.0"
+$codeCoveragePackageVersion = "17.2.0"
 
 # Restore the Code Coverage Generator tool
 dotnet tool restore

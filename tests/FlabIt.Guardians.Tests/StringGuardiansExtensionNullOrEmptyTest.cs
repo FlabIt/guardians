@@ -90,7 +90,7 @@ namespace FlabIt.Guardians.Tests
             AssertThatThrows<ArgumentNullException>(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue));
         }
 
-        [TestCaseSource(nameof(NonNullStringsTestValuesSource))]
+        [TestCaseSource(nameof(NonEmptyStringsTestValuesSource))]
         public void When_calling_ThrowIfNullOrEmpty_with_non_null_values_should_not_throw(string testValue)
         {
             AssertThatDoesNotThrow(() => StringGuardiansExtension.ThrowIfNullOrEmpty(testValue));

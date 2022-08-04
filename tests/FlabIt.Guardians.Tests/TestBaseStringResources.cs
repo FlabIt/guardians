@@ -14,9 +14,7 @@ namespace FlabIt.Guardians.Tests
         /// <param name="formatProvider">The format provider used to format the resources.</param>
         public TestBaseStringResources(IFormatProvider formatProvider)
         {
-            formatProvider.ThrowIfNull();
-
-            _formatProvider = formatProvider;
+            _formatProvider = formatProvider.ThrowIfNull();
         }
 
         protected string Format(string message, params object[] parameters)
