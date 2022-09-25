@@ -7,7 +7,7 @@
 [![nuget-downloads](https://img.shields.io/nuget/dt/FlabIt.Guardians.svg)](https://www.nuget.org/packages/FlabIt.Guardians/)
 
 **FlabIt Guardians** helps you to easily fulfill a fundamental part of OOP: protecting your code against invalid values.  
-This MIT-licensed library is [easy to use](#usage) and offers [an abundance](#features) of [well tested](#unit-tests) guardians and still remains extremely [performant and lightweight](#benchmarks).
+This MIT-licensed library is [easy to use](#usage) and offers [an abundance](#features) of [well tested](#unit-tests) guardians and still remains extremely performant and lightweight.
 
 Using guardians and following the [Fail Fast principle](https://enterprisecraftsmanship.com/posts/fail-fast-principle/), you can easily find and fix many bugs early in development and ship products that are more stable and contain less bugs.
 
