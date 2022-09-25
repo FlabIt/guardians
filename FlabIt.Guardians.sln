@@ -9,10 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlabIt.Guardians.Tests", "t
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1F1F046A-9131-4604-98D7-7FFD3602FACC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{9DF4DEE8-1F62-463E-BFA3-EA50CAE3392C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlabIt.Guardians.Benchmarks", "benchmarks\FlabIt.Guardians.Benchmarks\FlabIt.Guardians.Benchmarks.csproj", "{32B5DD32-07A1-46B2-85CD-FBC41400CE0A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,17 +23,12 @@ Global
 		{5FAECE19-53EB-49C9-AFB5-84778953F044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FAECE19-53EB-49C9-AFB5-84778953F044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FAECE19-53EB-49C9-AFB5-84778953F044}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32B5DD32-07A1-46B2-85CD-FBC41400CE0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32B5DD32-07A1-46B2-85CD-FBC41400CE0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32B5DD32-07A1-46B2-85CD-FBC41400CE0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32B5DD32-07A1-46B2-85CD-FBC41400CE0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5FAECE19-53EB-49C9-AFB5-84778953F044} = {1F1F046A-9131-4604-98D7-7FFD3602FACC}
-		{32B5DD32-07A1-46B2-85CD-FBC41400CE0A} = {9DF4DEE8-1F62-463E-BFA3-EA50CAE3392C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E90F590-D40B-4711-9269-06A2133162B5}

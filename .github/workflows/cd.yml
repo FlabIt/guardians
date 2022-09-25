@@ -12,8 +12,6 @@ env:
   DOTNET_FRAMEWORK: "net6.0"
   IS_PRERELEASE: "true"
   NUGET_PACKAGES_SOURCE_NAME: "nuget.org"
-  TEST_RESULTS_DIR: "./test-results/"
-  RUN_BENCHMARK: "false"
 
 jobs:
   build:

@@ -10,8 +10,6 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   BUILD_CONFIGURATION: "Release"
   DOTNET_FRAMEWORK: "net6.0"
-  TEST_RESULTS_DIR: "./test-results/"
-  RUN_BENCHMARK: "false"
 
 jobs:
   build:

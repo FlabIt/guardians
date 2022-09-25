@@ -1,7 +1,6 @@
 param(
   [String]$configuration = "Release",
   [String]$testResultsDirectory = "./test-results/",
-  [String]$benchmark = "false",
   [String]$compress = "false"
 )
 
@@ -12,12 +11,6 @@ if ($configuration -eq $null -or $configuration -eq "") {
 
 if ($testResultsDirectory -eq $null -or $testResultsDirectory -eq "") {
   Write-Output "Please specify the test results directory."
-  exit(1)
-}
-
-$runBenchmark = $null
-if (-not [bool]::TryParse($benchmark, [ref]$runBenchmark)) {
-  Write-Output "Please specify whether to perform a benchmark (true/false)."
   exit(1)
 }
 
@@ -32,7 +25,7 @@ $testProjectsDirectory = "./tests"
 
 . "./.build/functions.ps1"
 
-Write-Output "Running pipeline for: Configuration='$configuration' Test-Results-Directory='$testResultsDirectory' Benchmark='$runBenchmark' ..."
+Write-Output "Running pipeline for: Configuration='$configuration' Test-Results-Directory='$testResultsDirectory' ..."
 
 & "./.build/build_configuration.ps1" -configuration $configuration -target "$solutionFilePath"
 
@@ -62,14 +55,6 @@ if ((ensureSuccess -stepName "Publish App") -ne 0) {
 
 if ((ensureSuccess -stepName "Build NuGet Packages") -ne 0) {
   exit
-}
-
-if ($runBenchmark) {  
-  & "./.build/run_benchmark.ps1" -compress $compress
-
-  if ((ensureSuccess -stepName "Run Benchmark") -ne 0) {
-    exit
-  }
 }
 
 if ($useCompression) {
