@@ -54,11 +54,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Coverage Report v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "./coverage-reports.zip"
-
-      - name: Benchmark reports
-        uses: actions/upload-artifact@v1
-        if: env.RUN_BENCHMARK == 'true'
-        with:
-          name: Benchmark Report v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "./benchmark-reports.zip"
+          path: "./test-results/coverage-reports.tar.gz"
