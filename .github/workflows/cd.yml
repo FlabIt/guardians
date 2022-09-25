@@ -9,15 +9,13 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   BUILD_CONFIGURATION: "Release"
+  DOTNET_FRAMEWORK: "net6.0"
   IS_PRERELEASE: "true"
   NUGET_PACKAGES_SOURCE_NAME: "nuget.org"
-  TEST_RESULTS_DIR: "./test-results/"
-  RUN_BENCHMARK: "false"
-  COMPRESS_ARTIFACTS: "true"
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -31,37 +29,35 @@ jobs:
         with:
           setAllVars: true
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+      - name: CI
+        uses: addnab/docker-run-action@v3
         with:
-          dotnet-version: '6.0.x'
+          image: flabit/dotnet-pipeline:0.1
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: docker.io
+          options: -v ${{ github.workspace }}:/build/source -e SOLUTION_FILE=./FlabIt.Guardians.sln -e CONFIGURATION=${{ env.BUILD_CONFIGURATION }} -e FRAMEWORK=${{ env.DOTNET_FRAMEWORK }}
+          run: |
+            sh /scripts/.docker-build/run_full_pipeline.sh
 
-      - name: Run build script
-        run: ./.build/run_full_pipeline.ps1 -configuration ${{ env.BUILD_CONFIGURATION }} -testResultsDirectory "${{ env.TEST_RESULTS_DIR }}" -benchmark ${{ env.RUN_BENCHMARK }} -compress ${{ env.COMPRESS_ARTIFACTS }}
-        shell: pwsh
+      - name: Compress artifacts
+        run: |
+          tar -cf artifacts.tar ./src/FlabIt.Guardians/bin/**/*.nupkg
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
           name: FlabIt.Guardians v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "./artifacts.zip"
+          path: "./artifacts.tar"
 
       - name: Code Coverage reports
         uses: actions/upload-artifact@v1
         with:
           name: Coverage Report v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "./coverage-reports.zip"
-
-      - name: Benchmark reports
-        uses: actions/upload-artifact@v1
-        if: env.RUN_BENCHMARK == 'true'
-        with:
-          name: Benchmark Report v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "./benchmark-reports.zip"
+          path: "./test-results/coveragereport.tar.gz"
 
       - name: Publish NuGet package(s)
-        run: ./.build/publish_nuget_packages.ps1 -source ${{ env.NUGET_PACKAGES_SOURCE_NAME }} -token ${{ secrets.NUGET_PACKAGES_SOURCE_TOKEN }}
-        shell: pwsh
+        run: dotnet nuget push **/*.nupkg --source ${{ env.NUGET_PACKAGES_SOURCE_NAME }} --api-key ${{ secrets.NUGET_PACKAGES_SOURCE_TOKEN }} --skip-duplicate
 
       - name: Create Release
         uses: actions/create-release@v1

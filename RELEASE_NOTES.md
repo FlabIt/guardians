@@ -1,5 +1,11 @@
 # Release Notes
 
+## v0.10
+
+### Features
+
+* Remove Benchmarks (questionable results and a lot of maintenance overhead)
+
 ## v0.9
 
 ### Features
