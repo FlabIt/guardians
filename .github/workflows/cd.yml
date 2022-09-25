@@ -57,8 +57,7 @@ jobs:
           path: "./test-results/coveragereport.tar.gz"
 
       - name: Publish NuGet package(s)
-        run: ./.build/publish_nuget_packages.ps1 -source ${{ env.NUGET_PACKAGES_SOURCE_NAME }} -token ${{ secrets.NUGET_PACKAGES_SOURCE_TOKEN }}
-        shell: pwsh
+        run: dotnet nuget push **/*.nupkg --source ${{ env.NUGET_PACKAGES_SOURCE_NAME }} --api-key ${{ secrets.NUGET_PACKAGES_SOURCE_TOKEN }} --skip-duplicate
 
       - name: Create Release
         uses: actions/create-release@v1
