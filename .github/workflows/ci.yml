@@ -54,4 +54,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Coverage Report v${{ env.NBGV_AssemblyInformationalVersion }}
-          path: "/tmp/test-results/coverage-reports.tar.gz"
+          path: "./test-results/coveragereport.tar.gz"
